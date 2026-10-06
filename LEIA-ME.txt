@@ -1,0 +1,20 @@
+BONTEMPO AGRO 4.0
+
+Conteúdo:
+- index.html
+- manifest.json
+- sw.js
+- logo-bontempo.png
+
+Novidades:
+- Histórico local de caldas (até 100 registros)
+- Catálogo inicial de produtos/ativos comuns, sem doses automáticas
+- Busca inteligente por nome/princípio ativo
+- Sugestão de categoria e formulações para conferência
+- Cálculo de volume total e quantidade total por produto
+- Tabela de referência de ordem de preparo fornecida pelo usuário
+- Oficina para configurações e inclusão de produtos
+- PWA: manifest + service worker para instalação como app web
+
+IMPORTANTE:
+O catálogo é inicial e não pretende representar todos os produtos registrados ou "todos os mais usados". Formulação, dose, compatibilidade, cultura, condições de aplicação e autorização para aplicação por drone devem ser confirmadas no rótulo/bula e nas regras aplicáveis. O aplicativo não deve inventar doses nem tratar uma ordem de mistura como universal.
