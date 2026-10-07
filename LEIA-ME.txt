@@ -1,10 +1,6 @@
-BONTEMPO AGRO — VERSÃO SIMPLES + HISTÓRICO
-- Seleciona 1 a 10 produtos.
-- Digita nome, categoria, formulação, dose/ha e unidade.
-- Mostra a tabela de formulações dentro do app.
-- Calcula água total e quantidade total de cada produto.
-- Organiza os produtos pela ordem da tabela fornecida.
-- Salva caldas no histórico do aparelho/navegador.
-- Permite reabrir uma calda salva ou excluir do histórico.
-- O histórico usa armazenamento local; não sincroniza entre aparelhos.
-- Doses, compatibilidade, cultura autorizada e preparo devem ser conferidos na bula/rótulo e com o fabricante.
+BONTEMPO AGRO — CALDA PRONTA
+Versão simples com histórico.
+O resultado mostra a receita da calda em passos: água primeiro e depois os produtos ordenados pela tabela de formulações fornecida.
+Cada passo mostra a quantidade total calculada para a área.
+O histórico permite salvar, reabrir e excluir caldas.
+A ordem exibida é uma referência baseada na tabela fornecida; sempre conferir bula/rótulo, compatibilidade e orientação do fabricante.

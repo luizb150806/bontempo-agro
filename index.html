@@ -12,6 +12,12 @@ header{background:linear-gradient(135deg,#075b2d,#119447);color:#fff;padding:18p
 .table-toggle{margin-top:9px;background:#e9f4ed;color:#075b2d}
 .form-table{display:none;margin-top:10px;overflow:auto}.form-table table{width:100%;border-collapse:collapse;font-size:12px;min-width:520px}
 .form-table th,.form-table td{border:1px solid #cbd7d0;padding:7px;text-align:left}.form-table th{background:#087a3b;color:#fff}
+
+.recipe-head{background:#eaf7ee;border-radius:14px;padding:13px;margin:8px 0 12px}
+.recipe-head strong{display:block;color:#087a3b;font-size:20px}
+.step{display:flex;gap:10px;align-items:flex-start;border:1px solid #dce5df;border-radius:13px;padding:12px;margin:8px 0;background:#fff}
+.step-num{min-width:34px;height:34px;border-radius:50%;background:#087a3b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
+.step-main{flex:1}.step-main b{display:block;font-size:17px}.step-qty{font-size:19px;font-weight:900;color:#087a3b;margin-top:4px}.step-info{font-size:12px;color:#66736b;margin-top:3px}
 </style></head><body>
 <header><img src="logo-bontempo.png"><h1>Bontempo Agro</h1><div class="sub">Calculadora simples de calda</div></header>
 <main>
@@ -43,7 +49,12 @@ header{background:linear-gradient(135deg,#075b2d,#119447);color:#fff;padding:18p
 </tbody></table></div></section>
 <section class="card"><button onclick="calc()">CALCULAR CALDA</button>
 <button id="saveBtn" class="table-toggle" style="display:none" onclick="saveMix()">💾 SALVAR CALDA NO HISTÓRICO</button></section>
-<section id="result" class="card" style="display:none"><h2>Calda completa</h2><div id="water" class="total"></div><div class="note" style="margin:4px 0 10px">Produtos organizados pela ordem da tabela enviada.</div><div id="list"></div></section>
+<section id="result" class="card" style="display:none">
+<h2>🧪 Calda pronta</h2>
+<div class="recipe-head"><strong id="recipeTitle">Receita da calda</strong><span id="water" class="total"></span></div>
+<div class="note" style="margin:4px 0 10px">Sequência organizada conforme a tabela fornecida. Confira sempre bula/rótulo, compatibilidade e orientação do fabricante.</div>
+<div id="list"></div>
+</section>
 
 <section class="card">
 <h2>3. Histórico de caldas</h2>
@@ -80,9 +91,17 @@ function calc(){
  err.textContent="";let a=+area.value,v=+lha.value;if(!(a>0&&v>0)){err.textContent="Informe área e volume (L/ha).";return}
  let r=[...document.querySelectorAll(".product")].map((p,i)=>({i:i+1,n:p.querySelector(".name").value.trim(),c:p.querySelector(".cat").value,f:p.querySelector(".form").value,d:+p.querySelector(".dose").value,u:p.querySelector(".unit").value}));
  let bad=r.find(x=>!x.n||!x.f||!(x.d>0));if(bad){err.textContent="Preencha nome, formulação e dose do Produto "+bad.i+".";return}
- r.sort((x,y)=>idx(x.f)-idx(y.f)||x.i-y.i);water.textContent="Água total: "+(a*v).toLocaleString("pt-BR",{maximumFractionDigits:2})+" L";
- list.innerHTML=r.map((x,i)=>{let o=order.find(z=>z[0]==x.f);return `<div class="mix"><b>${i+1}. ${esc(x.n)}</b><div>${esc(x.c)} • ${x.f} — ${o?o[1]:""}</div><span class="badge">Total: ${qty(x.d*a,x.u)}</span><div class="note">Dose: ${x.d.toLocaleString("pt-BR")} ${x.u} por ha</div></div>`}).join("");
- result.style.display="block";document.getElementById("saveBtn").style.display="block";result.scrollIntoView({behavior:"smooth"});
+ r.sort((x,y)=>idx(x.f)-idx(y.f)||x.i-y.i);
+const totalWater=a*v;
+water.textContent="Água: "+totalWater.toLocaleString("pt-BR",{maximumFractionDigits:2})+" L";
+recipeTitle.textContent="Calda para "+a.toLocaleString("pt-BR")+" ha";
+let steps=`<div class="step"><div class="step-num">1</div><div class="step-main"><b>Água</b><div class="step-qty">${totalWater.toLocaleString("pt-BR",{maximumFractionDigits:2})} L</div><div class="step-info">Volume total da calda</div></div></div>`;
+steps+=r.map((x,i)=>{
+ let o=order.find(z=>z[0]==x.f);
+ return `<div class="step"><div class="step-num">${i+2}</div><div class="step-main"><b>${esc(x.n)}</b><div class="step-qty">${qty(x.d*a,x.u)}</div><div class="step-info">${esc(x.c)} • ${x.f} — ${o?o[1]:""} • Dose: ${x.d.toLocaleString("pt-BR")} ${x.u}/ha</div></div></div>`;
+}).join("");
+list.innerHTML=steps;
+result.style.display="block";document.getElementById("saveBtn").style.display="block";result.scrollIntoView({behavior:"smooth"});
 }
 
 function toggleTable(){
