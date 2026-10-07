@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bontempo Agro">
 <link rel="manifest" href="manifest.json">
-<title>Bontempo Agro 6.0</title>
+<title>Bontempo Agro 6.2</title>
 <style>
 :root{--g:#08783f;--g2:#0c5c35;--l:#eaf5ec;--dark:#07351f;--orange:#d87918;--bg:#f3f7f4;--card:#fff;--muted:#66736b;--line:#d8e2db;--danger:#a33a2b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#132018}
@@ -46,7 +46,7 @@ footer{padding:30px 16px 60px;text-align:center;color:var(--muted);font-size:12p
 <header>
   <div class="brand">
     <img id="brandLogo" src="logo-bontempo.png" alt="Bontempo">
-    <div class="brandText"><b>BONTEMPO AGRO</b><small>Pulverização agrícola • versão 6.0</small></div>
+    <div class="brandText"><b>BONTEMPO AGRO</b><small>Pulverização agrícola • versão 6.2</small></div>
   </div>
   <nav>
     <button class="active" data-view="calda">🧪 Nova calda</button>
@@ -100,7 +100,7 @@ footer{padding:30px 16px 60px;text-align:center;color:var(--muted);font-size:12p
     <div id="products"></div>
     <div class="card" style="margin-top:12px;background:#f8fbf9">
       <h3>🤖 Produto que não está no catálogo?</h3>
-      <p class="sub">Digite o nome abaixo. O Bontempo Agro tenta localizar informações públicas sobre o produto. Antes de entrar no catálogo oficial, os dados ficam em revisão.</p>
+      <p class="sub">Digite <b>qualquer nome livremente</b>. O campo não obriga escolher um produto salvo. Se não estiver no catálogo, use a pesquisa para consultar informações na internet e depois revisar os dados.</p>
       <div class="row">
         <input id="onlineProductName" placeholder="Ex.: nome comercial do produto">
         <button class="secondary fit" id="searchOnlineProduct">🔎 Pesquisar produto online</button>
@@ -200,7 +200,7 @@ footer{padding:30px 16px 60px;text-align:center;color:var(--muted);font-size:12p
   </div>
 </section>
 </main>
-<footer>Bontempo Agro 6.0 • Ferramenta de cálculo e organização. Não substitui bula/rótulo, responsável técnico ou exigências legais.</footer>
+<footer>Bontempo Agro 6.2 • Ferramenta de cálculo e organização. Não substitui bula/rótulo, responsável técnico ou exigências legais.</footer>
 
 <script>
 const CATALOG = [{"nome": "Glifosato", "aliases": ["glyphosate", "roundup", "glifosato"], "categoria": "Herbicida", "formulacoes": ["SL", "SG"], "obs": "Dose e formulação variam por produto e cultura."}, {"nome": "Glufosinato de amônio", "aliases": ["glufosinato", "glufosinate"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Confirmar registro, cultura e rótulo."}, {"nome": "2,4-D", "aliases": ["24d", "2 4 d"], "categoria": "Herbicida", "formulacoes": ["SL", "EC"], "obs": "Formulações e restrições variam por produto."}, {"nome": "Dicamba", "aliases": ["dicamba"], "categoria": "Herbicida", "formulacoes": ["SL", "SG"], "obs": "Confirmar condições de uso e deriva."}, {"nome": "Atrazina", "aliases": ["atrazine", "atrazina"], "categoria": "Herbicida", "formulacoes": ["SC", "WG"], "obs": "Confirmar cultura e rótulo."}, {"nome": "Cletodim", "aliases": ["clethodim", "cletodim"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Confirmar adjuvante indicado no rótulo."}, {"nome": "Haloxifope-P-metílico", "aliases": ["haloxyfop", "haloxifope"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Confirmar formulação comercial."}, {"nome": "Fomesafem", "aliases": ["fomesafen", "fomesafem"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Confirmar cultura e rótulo."}, {"nome": "Metsulfurom-metílico", "aliases": ["metsulfuron", "metsulfurom"], "categoria": "Herbicida", "formulacoes": ["WG"], "obs": "Confirmar compatibilidade e cultura."}, {"nome": "S-metolacloro", "aliases": ["s-metolachlor", "metolacloro"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Confirmar formulação e cultura."}, {"nome": "Lambda-cialotrina", "aliases": ["lambda cyhalothrin", "lambda-cialotrina"], "categoria": "Inseticida", "formulacoes": ["EC", "CS"], "obs": "Não preencher dose automaticamente."}, {"nome": "Clorantraniliprole", "aliases": ["chlorantraniliprole", "clorantraniliprole"], "categoria": "Inseticida", "formulacoes": ["SC", "WG"], "obs": "Confirmar formulação comercial."}, {"nome": "Tiametoxam", "aliases": ["thiamethoxam", "tiametoxam"], "categoria": "Inseticida", "formulacoes": ["WG", "SC"], "obs": "Confirmar produto registrado."}, {"nome": "Imidacloprido", "aliases": ["imidacloprid", "imidacloprido"], "categoria": "Inseticida", "formulacoes": ["SC", "SL", "WG"], "obs": "Confirmar cultura e rótulo."}, {"nome": "Acefato", "aliases": ["acephate", "acefato"], "categoria": "Inseticida", "formulacoes": ["SP", "WG"], "obs": "Confirmar formulação."}, {"nome": "Espinetoram", "aliases": ["spinetoram", "espinetoram"], "categoria": "Inseticida", "formulacoes": ["SC"], "obs": "Confirmar rótulo e intervalo de segurança."}, {"nome": "Tebufenozida", "aliases": ["tebufenozide", "tebufenozida"], "categoria": "Inseticida", "formulacoes": ["SC"], "obs": "Confirmar registro e formulação."}, {"nome": "Abamectina", "aliases": ["abamectin", "abamectina"], "categoria": "Inseticida/Acaricida", "formulacoes": ["EC", "SC"], "obs": "Confirmar formulação e cultura."}, {"nome": "Azoxistrobina", "aliases": ["azoxystrobin", "azoxistrobina"], "categoria": "Fungicida", "formulacoes": ["SC", "WG"], "obs": "Confirmar mistura e rótulo."}, {"nome": "Picoxistrobina", "aliases": ["picoxystrobin", "picoxistrobina"], "categoria": "Fungicida", "formulacoes": ["SC", "EC"], "obs": "Confirmar formulação comercial."}, {"nome": "Piraclostrobina", "aliases": ["pyraclostrobin", "piraclostrobina"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Confirmar formulação."}, {"nome": "Tebuconazol", "aliases": ["tebuconazole", "tebuconazol"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Confirmar produto e cultura."}, {"nome": "Difenoconazol", "aliases": ["difenoconazole", "difenoconazol"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Confirmar formulação."}, {"nome": "Mancozebe", "aliases": ["mancozeb", "mancozebe"], "categoria": "Fungicida", "formulacoes": ["WP", "WG"], "obs": "Confirmar compatibilidade."}, {"nome": "Clorotalonil", "aliases": ["chlorothalonil", "clorotalonil"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Confirmar rótulo e cultura."}, {"nome": "Fluxapiroxade", "aliases": ["fluxapyroxad", "fluxapiroxade"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Confirmar formulação comercial."}, {"nome": "Boro", "aliases": ["boro", "ácido bórico"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Concentração e fonte variam por produto."}, {"nome": "Zinco", "aliases": ["zinco", "zn"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Concentração varia por produto."}, {"nome": "Manganês", "aliases": ["manganes", "mn"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Concentração varia por produto."}, {"nome": "Óleo mineral", "aliases": ["óleo mineral", "oleo mineral"], "categoria": "Adjuvante/Óleo", "formulacoes": ["EO"], "obs": "Usar somente conforme rótulo."}, {"nome": "Óleo vegetal", "aliases": ["óleo vegetal", "oleo vegetal"], "categoria": "Adjuvante/Óleo", "formulacoes": ["EO"], "obs": "Usar somente conforme rótulo."}, {"nome": "Espalhante adesivo", "aliases": ["espalhante", "adesivo", "espalhante adesivo"], "categoria": "Adjuvante", "formulacoes": ["EA"], "obs": "Produto específico deve ser cadastrado para dose."}, {"nome": "Redutor de pH", "aliases": ["ph", "redutor de ph", "acidificante"], "categoria": "Condicionador de calda", "formulacoes": ["Especial"], "obs": "A dose depende do produto e da qualidade da água."}];
@@ -284,17 +284,31 @@ function normalizeOnlineResult(raw,query){
 }
 function renderOnlineResult(data,query,err){
   const box=$('onlineSearchResult');
-  if(err){box.innerHTML=`<div class="error"><b>Pesquisa online indisponível.</b><br>${esc(err)}<br><span class="small">Configure um endpoint na Oficina ou use a pesquisa assistida abaixo.</span><br><button class="secondary" style="margin-top:8px" onclick="window.open('https://www.google.com/search?q='+encodeURIComponent(${JSON.stringify(query)}+' produto bula rótulo'),'_blank')">🌐 Pesquisar na web</button></div>`;return}
+  if(err){box.innerHTML=`<div class="error"><b>Pesquisa automática não configurada.</b><br>${esc(err)}<br><span class="small">O app não consegue consultar bancos de dados externos diretamente pelo GitHub Pages sem um servidor intermediário. Você ainda pode pesquisar o produto agora na internet e preencher os dados manualmente.</span><br><div class="row" style="margin-top:10px"><button class="secondary fit" onclick="openWebSearch(${JSON.stringify(query)})">🌐 Pesquisar na internet</button><button class="secondary fit" onclick="prepareManualProduct(${JSON.stringify(query)})">✍️ Usar este nome manualmente</button></div></div>`;return}
   if(!data){box.innerHTML='<div class="error">Nenhum dado estruturado foi encontrado. Confira o nome comercial e tente novamente.</div>';return}
   box.innerHTML=`<div class="success"><b>Produto encontrado para revisão</b><br><span class="small">Nada é adicionado automaticamente ao catálogo oficial.</span>
     <div class="grid" style="margin-top:10px"><div><label>Nome</label><input id="onlineNome" value="${esc(data.nome)}"></div><div><label>Princípio ativo</label><input id="onlineAtivo" value="${esc(data.principioAtivo)}"></div><div><label>Categoria</label><input id="onlineCat" value="${esc(data.categoria)}"></div><div><label>Formulação</label><input id="onlineForm" value="${esc(data.formulacao)}"></div><div><label>Concentração</label><input id="onlineConc" value="${esc(data.concentracao)}"></div><div><label>Fabricante</label><input id="onlineFab" value="${esc(data.fabricante)}"></div><div><label>Registro</label><input id="onlineReg" value="${esc(data.registro)}"></div><div><label>Culturas</label><input id="onlineCult" value="${esc(data.culturas)}"></div></div>
     <label>Fonte</label><input id="onlineFonte" value="${esc(data.fonte)}"><label>Observação</label><textarea id="onlineObs">${esc(data.observacao||'Conferir bula/rótulo e registro antes de aprovar.')}</textarea>
     <div class="row" style="margin-top:10px"><button class="primary fit" onclick="approveOnlineProduct()">🔐 Aprovar e adicionar ao catálogo</button><button class="secondary fit" onclick="document.getElementById('onlineSearchResult').innerHTML=''">Cancelar</button></div></div>`;
 }
+function openWebSearch(query){
+  const q=String(query||'').trim();
+  if(!q)return;
+  const url='https://www.google.com/search?q='+encodeURIComponent(q+' produto bula rótulo fabricante registro MAPA');
+  window.open(url,'_blank','noopener');
+}
+function prepareManualProduct(query){
+  const q=String(query||'').trim();
+  if(!q)return;
+  const idx=products.findIndex(p=>!p.name);
+  if(idx>=0){products[idx].name=q;products[idx].match=null;renderProducts();return;}
+  products.push({name:q,cat:'',form:'',dose:'',unit:'L/ha',match:null});renderProducts();
+}
+
 async function searchOnlineProduct(){
   const q=$('onlineProductName').value.trim(); if(!q)return alert('Digite o nome do produto.');
   const ep=getSearchEndpoint();
-  if(!ep){renderOnlineResult(null,q,'O endpoint de pesquisa ainda não foi configurado na Oficina.');return}
+  if(!ep){renderOnlineResult(null,q,'Configure o endpoint na Oficina para obter dados estruturados dentro do app.');openWebSearch(q);return}
   $('onlineSearchResult').innerHTML='<div class="notice">🔎 Pesquisando informações públicas…</div>';
   try{
     const url=ep.includes('?')?ep+'&q='+encodeURIComponent(q):ep+'?q='+encodeURIComponent(q);
@@ -316,8 +330,11 @@ function renderProducts(){
     <h3>Produto ${i+1} ${p.match?'• cadastrado':'• manual'}</h3>
     <div class="searchbox">
       <label>Nome / princípio ativo</label>
-      <input value="${esc(p.name)}" oninput="editProduct(${i},'name',this.value);suggestProduct(${i},this.value)" autocomplete="off">
+      <input value="${esc(p.name)}" oninput="editProductFreeText(${i},this.value);suggestProduct(${i},this.value)" autocomplete="off" placeholder="Digite livremente o nome do produto">
       <div id="sug${i}" class="suggestions" style="display:none"></div>
+      <div class="row" style="margin-top:7px">
+        <button type="button" class="secondary fit" onclick="searchThisProductOnline(${i})">🔎 Pesquisar este produto</button>
+      </div>
     </div>
     <div class="grid">
       <div><label>Categoria</label><input value="${esc(p.cat)}" oninput="editProduct(${i},'cat',this.value)"></div>
@@ -362,12 +379,34 @@ function sortProductsByTable(){
   alert('Produtos organizados conforme a tabela de ordem configurada no Bontempo Agro. Confira a bula/rótulo e a compatibilidade antes do preparo.');
 }
 function removeProduct(i){products.splice(i,1);renderProducts()}
+function editProductFreeText(i,v){
+  products[i].name=v;
+  products[i].match=null;
+  const box=$('sug'+i); if(box) box.style.display='none';
+  // Digitação livre: não força seleção, não re-renderiza o campo e não interrompe o usuário.
+  renderSummary();
+  renderMixPreview();
+}
+function useTypedProduct(i){
+  const name=(products[i].name||'').trim();
+  if(!name) return alert('Digite o nome do produto primeiro.');
+  products[i].name=name;
+  products[i].match=null;
+  renderProducts();
+}
+function searchThisProductOnline(i){
+  const name=(products[i].name||'').trim();
+  if(!name) return alert('Digite o nome do produto primeiro.');
+  $('onlineProductName').value=name;
+  document.getElementById('onlineSearchResult')?.scrollIntoView({behavior:'smooth',block:'center'});
+  searchOnlineProduct();
+}
 function editProduct(i,k,v){
   products[i][k]=v;
   if(k==='name'){
     const m=findCatalog(v)[0]; products[i].match=m||null;
   }
-  if(k==='name'||k==='form') renderProducts();
+  if(k==='form') renderProducts();
 }
 function suggestProduct(i,v){
   const box=$('sug'+i); const arr=findCatalog(v);
