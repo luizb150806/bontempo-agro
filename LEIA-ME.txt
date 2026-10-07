@@ -1,20 +1,14 @@
-BONTEMPO AGRO 4.0
-
-Conteúdo:
-- index.html
-- manifest.json
-- sw.js
-- logo-bontempo.png
+Bontempo Agro 5.0
 
 Novidades:
-- Histórico local de caldas (até 100 registros)
-- Catálogo inicial de produtos/ativos comuns, sem doses automáticas
-- Busca inteligente por nome/princípio ativo
-- Sugestão de categoria e formulações para conferência
-- Cálculo de volume total e quantidade total por produto
-- Tabela de referência de ordem de preparo fornecida pelo usuário
-- Oficina para configurações e inclusão de produtos
-- PWA: manifest + service worker para instalação como app web
+- Seleção de produtos do catálogo dentro da Nova Calda.
+- Campo livre para digitar qualquer nome de produto.
+- Catálogo inicial ampliado com referências de produtos/ativos e formulações para conferência.
+- Oficina protegida por código local para administrar produtos e configurações.
+- Proprietário pode adicionar novos produtos ao catálogo pelo próprio app.
+- Histórico e cálculo preservados.
+- Preparado para evolução futura com login real e sincronização em nuvem.
 
 IMPORTANTE:
-O catálogo é inicial e não pretende representar todos os produtos registrados ou "todos os mais usados". Formulação, dose, compatibilidade, cultura, condições de aplicação e autorização para aplicação por drone devem ser confirmadas no rótulo/bula e nas regras aplicáveis. O aplicativo não deve inventar doses nem tratar uma ordem de mistura como universal.
+A proteção atual da Oficina é uma proteção local de interface (PIN no navegador/aparelho), não uma autenticação de servidor. Para garantir que somente o proprietário tenha acesso em qualquer aparelho, a versão publicada nas lojas deverá usar conta/login e backend.
+As informações de produto, dose, formulação, compatibilidade e ordem de preparo devem ser conferidas no rótulo/bula e nas orientações oficiais. O catálogo não fornece dose automaticamente.
