@@ -1,8 +1,11 @@
-BONTEMPO AGRO 6.1
+Bontempo Agro 6.4
 
-Novidades:
-- Seleção da quantidade de produtos a adicionar (1 a 10).
-- Botão para organizar a calda conforme a tabela de ordem configurada no app.
-- Prévia automática da ordem da calda no resumo.
-- Produtos com formulação desconhecida ficam marcados para conferência.
-- A ordem é uma referência baseada na tabela cadastrada; a bula/rótulo e a compatibilidade dos produtos prevalecem.
+Correções:
+- Produto pesquisado agora pode ser selecionado e adicionado automaticamente à calda.
+- Pesquisa iniciada dentro de um produto mantém o índice correto.
+- Resultado único também é adicionado diretamente após seleção.
+- Resultado detalhado tem botão “Usar este produto na calda”.
+- O app não abre mais o Google automaticamente, evitando sair/bugar a aplicação.
+- Sem endpoint configurado, o usuário permanece no app e pode adicionar o nome manualmente ou configurar a pesquisa na Oficina.
+
+A pesquisa online real dentro do app exige um endpoint/API que retorne JSON estruturado.

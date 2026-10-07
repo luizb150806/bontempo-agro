@@ -172,7 +172,7 @@ footer{padding:30px 16px 60px;text-align:center;color:var(--muted);font-size:12p
   </div>
   <div class="card">
     <h2>🤖 Pesquisa online de produtos</h2>
-    <p class="sub">Configure o endereço do seu servidor de pesquisa. O app envia apenas o nome pesquisado e espera dados estruturados para revisão. Nunca coloque uma chave de API privada dentro do GitHub Pages.</p>
+    <p class="sub">Configure o endereço do seu servidor de pesquisa. Sem endpoint, o app não abre mais o Google automaticamente e mantém o usuário dentro do aplicativo. O app envia apenas o nome pesquisado e espera dados estruturados para revisão. Nunca coloque uma chave de API privada dentro do GitHub Pages.</p>
     <label>Endpoint de pesquisa</label>
     <input id="searchEndpoint" placeholder="https://seu-servidor.com/api/produto?q=">
     <div class="row" style="margin-top:10px"><button class="primary fit" id="saveSearchEndpoint">Salvar endpoint</button><button class="secondary fit" id="testSearchEndpoint">Testar pesquisa</button></div>
@@ -289,22 +289,27 @@ function normalizeOnlineResults(raw,query){
 }
 function selectOnlineProduct(data,targetIndex){
   if(!data)return;
-  if(targetIndex!==null && targetIndex!==undefined && products[targetIndex]){
-    products[targetIndex].name=data.nome||'';
-    products[targetIndex].cat=data.categoria||'Outro';
-    products[targetIndex].form=data.formulacao||'';
-    products[targetIndex].match=null;
-    renderProducts();
-    document.getElementById('onlineSearchResult').innerHTML='<div class=\"success\"><b>✓ Produto selecionado.</b> Ele foi colocado automaticamente na calda.</div>';
-    setTimeout(()=>document.getElementById('products')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
-    return;
+  let idx=targetIndex;
+  if(idx===null || idx===undefined || !products[idx]){
+    idx=products.findIndex(p=>!String(p.name||'').trim());
+    if(idx<0){ products.push({name:'',cat:'',form:'',dose:'',unit:'L/ha',match:null}); idx=products.length-1; }
   }
+  products[idx].name=data.nome||'';
+  products[idx].cat=data.categoria||'Outro';
+  products[idx].form=data.formulacao||'';
+  products[idx].match=null;
+  products[idx].online={principioAtivo:data.principioAtivo||'',concentracao:data.concentracao||'',fabricante:data.fabricante||'',registro:data.registro||'',fonte:data.fonte||''};
+  renderProducts();
   $('onlineProductName').value=data.nome||'';
-  renderOnlineResult(data,data.nome||'');
+  $('onlineSearchResult').innerHTML='<div class="success"><b>✓ Produto adicionado à calda.</b><br><span class="small">Ele foi colocado no produto '+(idx+1)+' e os dados encontrados foram preenchidos. Você ainda deve conferir a bula/rótulo.</span></div>';
+  setTimeout(()=>document.getElementById('products')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
+}
+function getOnlineDetail(){
+  return {nome:$('onlineNome')?.value.trim()||'',principioAtivo:$('onlineAtivo')?.value.trim()||'',categoria:$('onlineCat')?.value.trim()||'Outro',formulacao:$('onlineForm')?.value.trim()||'',concentracao:$('onlineConc')?.value.trim()||'',fabricante:$('onlineFab')?.value.trim()||'',registro:$('onlineReg')?.value.trim()||'',culturas:$('onlineCult')?.value.trim()||'',fonte:$('onlineFonte')?.value.trim()||'',observacao:$('onlineObs')?.value.trim()||''};
 }
 function renderOnlineResult(data,query,err,targetIndex=null){
   const box=$('onlineSearchResult');
-  if(err){box.innerHTML=`<div class="error"><b>Pesquisa automática não configurada.</b><br>${esc(err)}<br><span class="small">Para selecionar um resultado e voltar automaticamente para a calda, a pesquisa precisa retornar resultados estruturados pelo endpoint configurado na Oficina.</span><br><div class="row" style="margin-top:10px"><button class="secondary fit" onclick="openWebSearch(${JSON.stringify(query)})">🌐 Pesquisar na internet</button><button class="secondary fit" onclick="prepareManualProduct(${JSON.stringify(query)})">✍️ Usar este nome manualmente</button></div></div>`;return}
+  if(err){box.innerHTML=`<div class="error"><b>Pesquisa online ainda não configurada.</b><br>${esc(err)}<br><span class="small">Para não tirar o cliente do aplicativo e não causar o bug anterior, a V6.4 não abre mais o Google automaticamente.</span><div class="row" style="margin-top:10px"><button class="primary fit" onclick="prepareManualProduct(${JSON.stringify(query)})">✍️ Adicionar este nome à calda</button><button class="secondary fit" onclick="show('oficina');document.getElementById('searchEndpoint')?.focus()">⚙️ Configurar pesquisa online</button></div></div>`;return}
   if(Array.isArray(data)){
     if(!data.length){box.innerHTML='<div class="error">Nenhum resultado encontrado. Tente o nome comercial completo.</div>';return}
     box.innerHTML=`<div class="success"><b>Resultados encontrados</b><br><span class="small">Toque em um produto para colocá-lo automaticamente na calda.</span>${data.map((d,i)=>`<button class="pickerItem" style="width:100%;text-align:left;margin-top:8px" onclick="selectOnlineProduct(window.__onlineResults[${i}],${targetIndex===null?'null':targetIndex})"><b>${esc(d.nome)}</b><span>${esc(d.fabricante||'Fabricante não informado')} • ${esc(d.formulacao||'Formulação não informada')} • ${esc(d.categoria||'Outro')}</span></button>`).join('')}</div>`;
@@ -314,13 +319,10 @@ function renderOnlineResult(data,query,err,targetIndex=null){
   box.innerHTML=`<div class="success"><b>Produto encontrado para revisão</b><br><span class="small">Selecione este resultado para colocá-lo diretamente na calda, ou aprove-o na Oficina para o catálogo oficial.</span>
     <div class="grid" style="margin-top:10px"><div><label>Nome</label><input id="onlineNome" value="${esc(data.nome)}"></div><div><label>Princípio ativo</label><input id="onlineAtivo" value="${esc(data.principioAtivo)}"></div><div><label>Categoria</label><input id="onlineCat" value="${esc(data.categoria)}"></div><div><label>Formulação</label><input id="onlineForm" value="${esc(data.formulacao)}"></div><div><label>Concentração</label><input id="onlineConc" value="${esc(data.concentracao)}"></div><div><label>Fabricante</label><input id="onlineFab" value="${esc(data.fabricante)}"></div><div><label>Registro</label><input id="onlineReg" value="${esc(data.registro)}"></div><div><label>Culturas</label><input id="onlineCult" value="${esc(data.culturas)}"></div></div>
     <label>Fonte</label><input id="onlineFonte" value="${esc(data.fonte)}"><label>Observação</label><textarea id="onlineObs">${esc(data.observacao||'Conferir bula/rótulo e registro antes de aprovar.')}</textarea>
-    <div class="row" style="margin-top:10px"><button class="primary fit" onclick="approveOnlineProduct()">🔐 Aprovar e adicionar ao catálogo</button><button class="secondary fit" onclick="document.getElementById('onlineSearchResult').innerHTML=''">Cancelar</button></div></div>`;
+    <div class="row" style="margin-top:10px"><button class="primary fit" onclick="selectOnlineProduct(getOnlineDetail(),${targetIndex===null?'null':targetIndex})">➕ Usar este produto na calda</button><button class="secondary fit" onclick="approveOnlineProduct()">🔐 Aprovar no catálogo</button><button class="secondary fit" onclick="document.getElementById('onlineSearchResult').innerHTML=''">Cancelar</button></div></div>`;
 }
 function openWebSearch(query){
-  const q=String(query||'').trim();
-  if(!q)return;
-  const url='https://www.google.com/search?q='+encodeURIComponent(q+' produto bula rótulo fabricante registro MAPA');
-  window.open(url,'_blank','noopener');
+  alert('A pesquisa externa foi desativada nesta versão para não tirar o cliente do Bontempo Agro. Configure o endpoint de pesquisa na Oficina para trazer resultados selecionáveis dentro do app.');
 }
 function prepareManualProduct(query){
   const q=String(query||'').trim();
@@ -333,7 +335,7 @@ function prepareManualProduct(query){
 async function searchOnlineProduct(targetIndex=null){
   const q=$('onlineProductName').value.trim(); if(!q)return alert('Digite o nome do produto.');
   const ep=getSearchEndpoint();
-  if(!ep){renderOnlineResult(null,q,'Configure o endpoint na Oficina para obter resultados selecionáveis dentro do app.');openWebSearch(q);return}
+  if(!ep){renderOnlineResult(null,q,'Configure o endpoint de pesquisa na Oficina.');return}
   $('onlineSearchResult').innerHTML='<div class="notice">🔎 Pesquisando informações públicas…</div>';
   try{
     const url=ep.includes('?')?ep+'&q='+encodeURIComponent(q):ep+'?q='+encodeURIComponent(q);
