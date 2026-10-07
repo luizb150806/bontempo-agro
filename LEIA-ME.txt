@@ -1,14 +1,8 @@
-Bontempo Agro 5.0
+BONTEMPO AGRO 6.1
 
 Novidades:
-- Seleção de produtos do catálogo dentro da Nova Calda.
-- Campo livre para digitar qualquer nome de produto.
-- Catálogo inicial ampliado com referências de produtos/ativos e formulações para conferência.
-- Oficina protegida por código local para administrar produtos e configurações.
-- Proprietário pode adicionar novos produtos ao catálogo pelo próprio app.
-- Histórico e cálculo preservados.
-- Preparado para evolução futura com login real e sincronização em nuvem.
-
-IMPORTANTE:
-A proteção atual da Oficina é uma proteção local de interface (PIN no navegador/aparelho), não uma autenticação de servidor. Para garantir que somente o proprietário tenha acesso em qualquer aparelho, a versão publicada nas lojas deverá usar conta/login e backend.
-As informações de produto, dose, formulação, compatibilidade e ordem de preparo devem ser conferidas no rótulo/bula e nas orientações oficiais. O catálogo não fornece dose automaticamente.
+- Seleção da quantidade de produtos a adicionar (1 a 10).
+- Botão para organizar a calda conforme a tabela de ordem configurada no app.
+- Prévia automática da ordem da calda no resumo.
+- Produtos com formulação desconhecida ficam marcados para conferência.
+- A ordem é uma referência baseada na tabela cadastrada; a bula/rótulo e a compatibilidade dos produtos prevalecem.
