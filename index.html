@@ -18,6 +18,11 @@ header{background:linear-gradient(135deg,#075b2d,#119447);color:#fff;padding:18p
 .step{display:flex;gap:10px;align-items:flex-start;border:1px solid #dce5df;border-radius:13px;padding:12px;margin:8px 0;background:#fff}
 .step-num{min-width:34px;height:34px;border-radius:50%;background:#087a3b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
 .step-main{flex:1}.step-main b{display:block;font-size:17px}.step-qty{font-size:19px;font-weight:900;color:#087a3b;margin-top:4px}.step-info{font-size:12px;color:#66736b;margin-top:3px}
+
+.final-summary{background:#eaf7ee;border:2px solid #16a34a;border-radius:15px;padding:14px;margin:10px 0 14px}
+.final-summary .line{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:16px}
+.final-summary .strong{font-size:21px;font-weight:900;color:#087a3b}
+.final-summary .total{font-size:24px}
 </style></head><body>
 <header><img src="logo-bontempo.png"><h1>Bontempo Agro</h1><div class="sub">Calculadora simples de calda</div></header>
 <main>
@@ -51,8 +56,13 @@ header{background:linear-gradient(135deg,#075b2d,#119447);color:#fff;padding:18p
 <button id="saveBtn" class="table-toggle" style="display:none" onclick="saveMix()">💾 SALVAR CALDA NO HISTÓRICO</button></section>
 <section id="result" class="card" style="display:none">
 <h2>🧪 Calda pronta</h2>
-<div class="recipe-head"><strong id="recipeTitle">Receita da calda</strong><span id="water" class="total"></span></div>
-<div class="note" style="margin:4px 0 10px">Sequência organizada conforme a tabela fornecida. Confira sempre bula/rótulo, compatibilidade e orientação do fabricante.</div>
+<div class="recipe-head"><strong id="recipeTitle">Receita da calda</strong></div>
+<div class="final-summary">
+  <div class="line"><span>Volume final da calda</span><b id="finalVolume" class="strong"></b></div>
+  <div class="line"><span>Total de produtos líquidos</span><b id="liquidProducts"></b></div>
+  <div class="line"><span>💧 Água a adicionar</span><b id="waterToAdd" class="strong"></b></div>
+</div>
+<div class="note" style="margin:4px 0 10px">A água é descontada dos produtos líquidos em L/ha ou mL/ha para que o volume final da calda permaneça exatamente no volume informado. Produtos em kg/ha ou g/ha não entram nessa subtração de litros.</div>
 <div id="list"></div>
 </section>
 
@@ -93,9 +103,17 @@ function calc(){
  let bad=r.find(x=>!x.n||!x.f||!(x.d>0));if(bad){err.textContent="Preencha nome, formulação e dose do Produto "+bad.i+".";return}
  r.sort((x,y)=>idx(x.f)-idx(y.f)||x.i-y.i);
 const totalWater=a*v;
-water.textContent="Água: "+totalWater.toLocaleString("pt-BR",{maximumFractionDigits:2})+" L";
-recipeTitle.textContent="Calda para "+a.toLocaleString("pt-BR")+" ha";
-let steps=`<div class="step"><div class="step-num">1</div><div class="step-main"><b>Água</b><div class="step-qty">${totalWater.toLocaleString("pt-BR",{maximumFractionDigits:2})} L</div><div class="step-info">Volume total da calda</div></div></div>`;
+const liquidTotal=r.reduce((sum,x)=>{
+  if(x.u==="L/ha") return sum+(x.d*a);
+  if(x.u==="mL/ha") return sum+(x.d*a/1000);
+  return sum;
+},0);
+const waterToAdd=Math.max(0,totalWater-liquidTotal);
+finalVolume.textContent=totalWater.toLocaleString("pt-BR",{maximumFractionDigits:2})+" L";
+liquidProducts.textContent=liquidTotal.toLocaleString("pt-BR",{maximumFractionDigits:3})+" L";
+waterToAdd.textContent=waterToAdd.toLocaleString("pt-BR",{maximumFractionDigits:3})+" L";
+recipeTitle.textContent="Receita da calda para "+a.toLocaleString("pt-BR")+" ha";
+let steps=`<div class="step"><div class="step-num">1</div><div class="step-main"><b>Água</b><div class="step-qty">${waterToAdd.toLocaleString("pt-BR",{maximumFractionDigits:3})} L</div><div class="step-info">Quantidade de água a adicionar para fechar o volume final de ${totalWater.toLocaleString("pt-BR",{maximumFractionDigits:2})} L</div></div></div>`;
 steps+=r.map((x,i)=>{
  let o=order.find(z=>z[0]==x.f);
  return `<div class="step"><div class="step-num">${i+2}</div><div class="step-main"><b>${esc(x.n)}</b><div class="step-qty">${qty(x.d*a,x.u)}</div><div class="step-info">${esc(x.c)} • ${x.f} — ${o?o[1]:""} • Dose: ${x.d.toLocaleString("pt-BR")} ${x.u}/ha</div></div></div>`;

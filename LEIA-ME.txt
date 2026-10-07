@@ -1,6 +1,9 @@
-BONTEMPO AGRO — CALDA PRONTA
-Versão simples com histórico.
-O resultado mostra a receita da calda em passos: água primeiro e depois os produtos ordenados pela tabela de formulações fornecida.
-Cada passo mostra a quantidade total calculada para a área.
-O histórico permite salvar, reabrir e excluir caldas.
-A ordem exibida é uma referência baseada na tabela fornecida; sempre conferir bula/rótulo, compatibilidade e orientação do fabricante.
+BONTEMPO AGRO — CALDA PRONTA V2
+- Mantém a versão simples e o histórico.
+- O volume final é área x L/ha.
+- Soma os produtos líquidos informados em L/ha ou mL/ha.
+- Desconta esse volume do volume final e mostra exatamente a água a adicionar.
+- Exemplo: calda final 300 L e 106,5 L de produtos líquidos => 193,5 L de água.
+- Produtos em kg/ha ou g/ha não são convertidos para litros nem descontados, pois isso exigiria densidade/concentração específica.
+- A sequência dos produtos segue a tabela fornecida.
+- Conferir bula/rótulo, compatibilidade e orientação do fabricante.
