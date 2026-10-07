@@ -1,11 +1,10 @@
-Bontempo Agro 6.4
-
-Correções:
-- Produto pesquisado agora pode ser selecionado e adicionado automaticamente à calda.
-- Pesquisa iniciada dentro de um produto mantém o índice correto.
-- Resultado único também é adicionado diretamente após seleção.
-- Resultado detalhado tem botão “Usar este produto na calda”.
-- O app não abre mais o Google automaticamente, evitando sair/bugar a aplicação.
-- Sem endpoint configurado, o usuário permanece no app e pode adicionar o nome manualmente ou configurar a pesquisa na Oficina.
-
-A pesquisa online real dentro do app exige um endpoint/API que retorne JSON estruturado.
+BONTEMPO AGRO — VERSÃO SIMPLES + HISTÓRICO
+- Seleciona 1 a 10 produtos.
+- Digita nome, categoria, formulação, dose/ha e unidade.
+- Mostra a tabela de formulações dentro do app.
+- Calcula água total e quantidade total de cada produto.
+- Organiza os produtos pela ordem da tabela fornecida.
+- Salva caldas no histórico do aparelho/navegador.
+- Permite reabrir uma calda salva ou excluir do histórico.
+- O histórico usa armazenamento local; não sincroniza entre aparelhos.
+- Doses, compatibilidade, cultura autorizada e preparo devem ser conferidos na bula/rótulo e com o fabricante.

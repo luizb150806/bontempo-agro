@@ -1,500 +1,149 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#063b20">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Bontempo Agro">
-<link rel="manifest" href="manifest.json">
-<title>Bontempo Agro 6.2</title>
+<!doctype html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#087a3b"><link rel="manifest" href="manifest.json">
+<title>Bontempo Agro</title>
 <style>
-:root{--g:#08783f;--g2:#0c5c35;--l:#eaf5ec;--dark:#07351f;--orange:#d87918;--bg:#f3f7f4;--card:#fff;--muted:#66736b;--line:#d8e2db;--danger:#a33a2b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#132018}
-header{background:linear-gradient(135deg,#042d18,#08783f);color:white;padding:22px 18px 16px;position:sticky;top:0;z-index:20;box-shadow:0 4px 18px #0002}
-.brand{display:flex;align-items:center;gap:12px}.brand img{width:72px;height:48px;object-fit:contain;background:#ffffff10;border-radius:12px}.brandText b{font-size:24px;letter-spacing:.5px}.brandText small{display:block;opacity:.8;margin-top:2px}
-nav{display:flex;gap:8px;margin-top:16px;overflow:auto}nav button{flex:0 0 auto;border:0;border-radius:12px;padding:12px 14px;background:#ffffff18;color:white;font-weight:700}nav button.active{background:white;color:var(--g)}
-main{max-width:900px;margin:auto;padding:16px}.view{display:none}.view.active{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 4px 16px #0a32140b}
-h1,h2,h3{margin:0 0 14px}h2{font-size:22px}h3{font-size:17px}.sub{color:var(--muted);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(max-width:620px){.grid{grid-template-columns:1fr}}
-label{font-weight:700;font-size:14px;display:block;margin:10px 0 6px}input,select,textarea{width:100%;padding:13px 14px;border:1px solid #cbd8d0;border-radius:12px;font-size:16px;background:#fff;color:#132018}textarea{min-height:90px}
-button.primary,button.secondary,button.warn{border:0;border-radius:12px;padding:13px 16px;font-weight:800;font-size:15px;cursor:pointer}.primary{background:var(--g);color:#fff}.secondary{background:#e7f2ea;color:var(--g2)}.warn{background:#fff0ec;color:var(--danger)}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.row .fit{flex:0 0 auto}
-.stat{background:var(--l);border-radius:14px;padding:14px}.stat b{font-size:21px;display:block}.pill{display:inline-block;background:#eaf5ec;color:var(--g2);border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;margin:2px}
-.product{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:10px;background:#fbfdfb}.choiceBox{border:1px solid var(--line);border-radius:14px;padding:14px;background:#f6faf7;margin-top:10px}.choiceTitle{font-weight:800;font-size:16px;margin-bottom:10px}.product .remove{float:right}
-.checkgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}@media(max-width:620px){.checkgrid{grid-template-columns:1fr}}
-.check{border:1px solid var(--line);border-radius:12px;padding:11px}.check input{width:auto}
-.notice{border-left:4px solid var(--orange);background:#fff9f0;padding:12px;border-radius:8px;color:#5d431f;font-size:13px}
-.error{border-left:4px solid var(--danger);background:#fff3f1;padding:12px;border-radius:8px;color:#70271e;font-size:13px}
-.success{border-left:4px solid var(--g);background:#effaf1;padding:12px;border-radius:8px}
-.tableWrap{overflow:auto}.mixTable{width:100%;border-collapse:collapse;min-width:560px}.mixTable th,.mixTable td{border:1px solid #cbd8d0;padding:9px;text-align:left}.mixTable th{background:#08783f;color:white}.mixTable tr:nth-child(even){background:#f3f9f4}
-.searchbox{position:relative}.suggestions{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--line);border-radius:12px;z-index:10;box-shadow:0 10px 25px #0002;max-height:250px;overflow:auto}.suggestions div{padding:12px;border-bottom:1px solid var(--line);cursor:pointer}.suggestions div:last-child{border-bottom:0}
-.historyItem{border:1px solid var(--line);border-radius:14px;padding:13px;margin:8px 0}.historyItem b{display:block}.small{font-size:12px;color:var(--muted)}.right{text-align:right}.dangerText{color:var(--danger)}
-footer{padding:30px 16px 60px;text-align:center;color:var(--muted);font-size:12px}
+:root{--g:#087a3b;--bg:#f4f7f5;--line:#dce5df}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;color:#142018}
+header{background:linear-gradient(135deg,#075b2d,#119447);color:#fff;padding:18px;text-align:center}header img{width:70px;height:70px;object-fit:contain;background:#fff;border-radius:16px;padding:4px}h1{font-size:23px;margin:4px 0}.sub{font-size:13px;opacity:.9}main{max-width:720px;margin:auto;padding:13px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}h2{font-size:18px;margin:0 0 11px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}label{display:block;font-size:12px;font-weight:700;margin:0 0 5px;color:#425047}input,select{width:100%;padding:12px;border:1px solid #cbd7d0;border-radius:11px;font-size:16px;background:#fff}.products{display:grid;gap:10px}.product{border:1px solid var(--line);border-radius:13px;padding:11px;background:#fbfdfb}.pt{font-weight:800;color:var(--g);margin-bottom:8px}.pg{display:grid;grid-template-columns:1.3fr .9fr .9fr;gap:8px}.full{grid-column:1/-1}button{width:100%;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:800;background:var(--g);color:#fff}.mix{border-left:5px solid #16a34a;padding:10px 12px;margin:8px 0;background:#f5fbf7;border-radius:8px}.mix b{display:block}.badge{display:inline-block;background:#e6f4ea;color:#126b36;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:800;margin-top:4px}.note{font-size:12px;color:#66736b;line-height:1.45}.error{color:#c62828;font-weight:700;font-size:13px;margin-top:7px}.total{font-size:21px;font-weight:900;color:var(--g)}@media(max-width:560px){.grid,.pg{grid-template-columns:1fr}.full{grid-column:auto}}
 
-.pickerPanel{margin-top:12px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#f8fbf9}
-.pickerList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
-.pickerItem{border:1px solid var(--line);border-radius:12px;background:white;padding:12px;text-align:left;cursor:pointer}
-.pickerItem b{display:block}.pickerItem span{font-size:12px;color:var(--muted)}
-@media(max-width:620px){.pickerList{grid-template-columns:1fr}}
-.lockBadge{display:inline-block;background:#fff3d6;color:#7a4b00;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}
-</style>
-</head>
-<body>
-<header>
-  <div class="brand">
-    <img id="brandLogo" src="logo-bontempo.png" alt="Bontempo">
-    <div class="brandText"><b>BONTEMPO AGRO</b><small>Pulverização agrícola • versão 6.2</small></div>
-  </div>
-  <nav>
-    <button class="active" data-view="calda">🧪 Nova calda</button>
-    <button data-view="historico">🕘 Histórico</button>
-    <button data-view="produtos">📦 Produtos</button>
-    <button data-view="ordem">📋 Ordem de preparo</button>
-    <button id="officeNav" data-view="oficina">🔒 Oficina</button>
-  </nav>
-</header>
-
+.history-item{border:1px solid #dce5df;border-radius:12px;padding:11px;margin:8px 0;background:#fbfdfb}
+.history-title{font-weight:800;color:#087a3b}.history-meta{font-size:12px;color:#66736b;margin:4px 0 8px}
+.history-actions{display:flex;gap:7px}.history-actions button{width:auto;padding:9px 11px;font-size:13px}
+.table-toggle{margin-top:9px;background:#e9f4ed;color:#075b2d}
+.form-table{display:none;margin-top:10px;overflow:auto}.form-table table{width:100%;border-collapse:collapse;font-size:12px;min-width:520px}
+.form-table th,.form-table td{border:1px solid #cbd7d0;padding:7px;text-align:left}.form-table th{background:#087a3b;color:#fff}
+</style></head><body>
+<header><img src="logo-bontempo.png"><h1>Bontempo Agro</h1><div class="sub">Calculadora simples de calda</div></header>
 <main>
-<section id="calda" class="view active">
-  <div class="card">
-    <h2>Nova calda</h2>
-    <p class="sub">Selecione produtos do catálogo ou digite qualquer nome. O sistema calcula os totais e mantém a formulação/dose para conferência.</p>
-    <div class="grid">
-      <div><label>Área (ha)</label><input id="area" type="number" min="0" step="0.01" value="10"></div>
-      <div><label>Volume de aplicação (L/ha)</label><input id="volHa" type="number" min="0" step="0.1" value="10"></div>
-      <div><div><label>Cultura</label><input id="cultura" placeholder="Ex.: soja"></div></div>
-      <div><div><label>Talhão / identificação</label><input id="talhao" placeholder="Ex.: Talhão 04"></div></div>
-    </div>
-    <div class="row" style="margin-top:14px">
-      <div class="stat"><span>Volume total de calda</span><b id="totalAgua">100,00 L</b></div>
-      <div class="stat"><span>Produtos</span><b id="prodCount">0</b></div>
-    </div>
-  </div>
+<section class="card"><h2>1. Dados da aplicação</h2><div class="grid">
+<div><label>Área (ha)</label><input id="area" type="number" min="0" step="0.01" placeholder="Ex.: 10"></div>
+<div><label>Volume (L/ha)</label><input id="lha" type="number" min="0" step="0.1" placeholder="Ex.: 20"></div></div>
+<div style="margin-top:10px"><label>Quantos produtos?</label><select id="count" onchange="render()">
+<option>1</option><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></section>
 
-  <div class="card">
-    <h2>Produtos da calda</h2><p class="sub">Escolha uma das duas formas: <b>selecionar um produto salvo no Bontempo Agro</b> ou <b>escrever o nome do produto manualmente</b>. O nome digitado manualmente não é tratado como produto validado automaticamente.</p>
-    <div class="choiceBox">
-      <div class="choiceTitle">Como você quer adicionar o produto?</div>
-      <div class="row">
-        <button class="primary fit" id="openPicker">📦 Escolher produto salvo</button>
-        <button class="secondary fit" id="addProduct">✍️ Escrever nome do produto</button>
-      </div>
-      <div class="small" style="margin-top:8px">Os produtos cadastrados na Oficina aparecem aqui. Se o produto não estiver na lista, use <b>Escrever nome do produto</b> e depois <b>Pesquisar produto online</b>.</div>
-    </div>
-    <div class="row" style="margin-top:10px">
-      <div><label>Quantidade de produtos</label><select id="productQty">${Array.from({length:10},(_,i)=>`<option value="${i+1}">${i+1} produto${i?'s':''}</option>`).join('')}</select></div>
-      <button class="secondary fit" id="addProductQty">➕ Adicionar quantidade</button>
-      <button class="primary fit" id="sortProducts">🔢 Organizar na ordem da tabela</button>
-      <button class="secondary fit" id="clearProducts">Limpar produtos</button>
-    </div>
-    <div id="pickerPanel" class="pickerPanel" style="display:none">
-      <div class="row">
-        <div><label>Pesquisar no catálogo</label><input id="pickerSearch" placeholder="Ex.: glifosato, mancozebe, óleo..."></div>
-        <div><label>Categoria</label><select id="pickerCategory"><option value="">Todas</option></select></div>
-      </div>
-      <div id="pickerList" class="pickerList"></div>
-    </div>
-    <div id="products"></div>
-    <div class="card" style="margin-top:12px;background:#f8fbf9">
-      <h3>🤖 Produto que não está no catálogo?</h3>
-      <p class="sub">Digite <b>qualquer nome livremente</b>. O campo não obriga escolher um produto salvo. Se não estiver no catálogo, use a pesquisa para consultar informações na internet e depois revisar os dados.</p>
-      <div class="row">
-        <input id="onlineProductName" placeholder="Ex.: nome comercial do produto">
-        <button class="secondary fit" id="searchOnlineProduct">🔎 Pesquisar produto online</button>
-      </div>
-      <div id="onlineSearchResult" style="margin-top:10px"></div>
-    </div>
-    <div class="notice" style="margin-top:12px">
-      <b>Importante:</b> o Bontempo Agro não inventa dose nem garante compatibilidade. Use a dose, formulação e orientação do rótulo/bula do produto registrado e verifique a compatibilidade da mistura antes do preparo.
-    </div>
-  </div>
+<section class="card"><h2>2. Informe os produtos</h2><div id="products" class="products"></div><div id="err" class="error"></div>
+<button type="button" class="table-toggle" onclick="toggleTable()">📋 Ver tabela de formulações</button>
+<div id="formTable" class="form-table">
+<table><thead><tr><th>Ordem</th><th>Tipo de formulação</th><th>Formulação</th></tr></thead><tbody>
+<tr><td>1</td><td>Água</td><td>-</td></tr>
+<tr><td>2</td><td>Condicionador de Calda</td><td>Redutor de pH</td></tr>
+<tr><td>3</td><td>Grânulos Dispersáveis em Água</td><td>WG/WP</td></tr>
+<tr><td>4</td><td>Pó Molhável</td><td>PM</td></tr>
+<tr><td>5</td><td>Dry Flowable</td><td>DF</td></tr>
+<tr><td>6</td><td>Suspensão Concentrada</td><td>SC</td></tr>
+<tr><td>7</td><td>Emulsão em Água</td><td>EW</td></tr>
+<tr><td>8</td><td>Micro Emulsão</td><td>ME</td></tr>
+<tr><td>9</td><td>Espalhante Adesivo</td><td>EA</td></tr>
+<tr><td>10</td><td>Óleo Emulsionado</td><td>EO</td></tr>
+<tr><td>11</td><td>Concentrado Emulsionável</td><td>EC</td></tr>
+<tr><td>12</td><td>Concentrado/Líquido Solúvel</td><td>SL</td></tr>
+<tr><td>13</td><td>Solução Aquosa não Concentrada</td><td>SANC</td></tr>
+<tr><td>14</td><td>Solução Aquosa Concentrada</td><td>SAC</td></tr>
+<tr><td>15</td><td>Ácido Bórico / Adubo foliar ou Adjuvantes</td><td>OUTROS</td></tr>
+</tbody></table></div></section>
+<section class="card"><button onclick="calc()">CALCULAR CALDA</button>
+<button id="saveBtn" class="table-toggle" style="display:none" onclick="saveMix()">💾 SALVAR CALDA NO HISTÓRICO</button></section>
+<section id="result" class="card" style="display:none"><h2>Calda completa</h2><div id="water" class="total"></div><div class="note" style="margin:4px 0 10px">Produtos organizados pela ordem da tabela enviada.</div><div id="list"></div></section>
 
-  <div class="card">
-    <h2>Resumo da calda</h2>
-    <div id="summary"><p class="sub">Adicione produtos para gerar o resumo.</p></div>
-    <div class="row" style="margin-top:12px">
-      <button class="primary fit" id="saveBatch">💾 Salvar calda</button>
-      <button class="secondary fit" id="newBatch">↻ Nova calda</button>
-    </div>
-    <div id="mixPreview" class="pickerPanel" style="margin-top:14px"><h3>🧪 Ordem da calda</h3><div class="sub">A ordem abaixo é calculada pela formulação informada e pela tabela configurada no app.</div><div id="mixPreviewList" style="margin-top:10px"></div></div>
-  </div>
+<section class="card">
+<h2>3. Histórico de caldas</h2>
+<div id="history"></div>
+<div id="emptyHistory" class="note">Nenhuma calda salva ainda.</div>
 </section>
-
-<section id="historico" class="view">
-  <div class="card"><h2>Histórico de caldas</h2><p class="sub">As caldas ficam salvas neste aparelho/navegador.</p>
-    <div class="row"><button class="warn fit" id="clearHistory">Apagar histórico</button></div>
-  </div>
-  <div id="historyList"></div>
-</section>
-
-<section id="produtos" class="view">
-  <div class="card">
-    <h2>Catálogo inteligente</h2>
-    <p class="sub">Pesquise um produto cadastrado, selecione-o com um toque ou digite qualquer nome que não esteja no catálogo. Produtos cadastrados pelo proprietário aparecem para todos os usuários.</p>
-    <div class="searchbox"><input id="catalogSearch" placeholder="Ex.: glifosato, lambda, mancozebe..."><div id="catalogSuggestions" class="suggestions" style="display:none"></div></div>
-  </div>
-  <div class="card">
-    <h2>Produtos cadastrados</h2>
-    <div class="tableWrap"><table class="mixTable"><thead><tr><th>Produto/ativo</th><th>Categoria</th><th>Formulações de referência</th><th>Observação</th></tr></thead><tbody id="catalogTable"></tbody></table></div>
-  </div>
-</section>
-
-<section id="ordem" class="view">
-  <div class="card">
-    <h2>Ordem de preparo — referência</h2>
-    <p class="sub">Tabela fornecida para integrar ao aplicativo. Ela é uma referência configurável; a ordem final deve seguir a bula/rótulo, formulação e compatibilidade dos produtos.</p>
-    <div class="tableWrap"><table class="mixTable"><thead><tr><th>#</th><th>Tipo</th><th>Formulação</th></tr></thead><tbody id="mixBody"></tbody></table></div>
-  </div>
-  <div class="card">
-    <h2>Como o app usa a formulação</h2>
-    <p class="sub">Ao selecionar um produto e informar a formulação confirmada no rótulo, o Bontempo Agro organiza os itens pela referência acima. Se houver formulação desconhecida ou conflito, o item fica marcado para conferência.</p>
-  </div>
-</section>
-
-<section id="oficina" class="view">
-  <div id="officeLocked" class="card">
-    <h2>🔒 Oficina privada</h2>
-    <p class="sub">Área reservada ao proprietário para administrar produtos, categorias, drones e configurações.</p>
-    <button class="primary" id="unlockOffice">Entrar na Oficina</button>
-  </div>
-  <div id="officeContent" style="display:none">
-  <div class="card">
-    <h2>Oficina de criação</h2>
-    <div class="grid">
-      <div><label>Nome do aplicativo</label><input id="appName" value="Bontempo Agro"></div>
-      <div><label>Subtítulo</label><input id="appSubtitle" value="Pulverização agrícola"></div>
-    </div>
-    <label>Mensagem de segurança</label><textarea id="safetyText"></textarea>
-    <div class="row" style="margin-top:10px"><button class="primary fit" id="saveSettings">Salvar configurações</button><button class="secondary fit" id="resetSettings">Restaurar padrão</button></div>
-  </div>
-  <div class="card">
-    <h2>🤖 Pesquisa online de produtos</h2>
-    <p class="sub">Configure o endereço do seu servidor de pesquisa. Sem endpoint, o app não abre mais o Google automaticamente e mantém o usuário dentro do aplicativo. O app envia apenas o nome pesquisado e espera dados estruturados para revisão. Nunca coloque uma chave de API privada dentro do GitHub Pages.</p>
-    <label>Endpoint de pesquisa</label>
-    <input id="searchEndpoint" placeholder="https://seu-servidor.com/api/produto?q=">
-    <div class="row" style="margin-top:10px"><button class="primary fit" id="saveSearchEndpoint">Salvar endpoint</button><button class="secondary fit" id="testSearchEndpoint">Testar pesquisa</button></div>
-    <div class="notice" style="margin-top:10px"><b>Fluxo V6:</b> catálogo local → pesquisa online → resultado com fonte → revisão → aprovação na Oficina → catálogo oficial.</div>
-  </div>
-  <div class="card">
-    <h2>Adicionar produto ao catálogo</h2>
-    <div class="grid">
-      <div><label>Nome</label><input id="newName"></div>
-      <div><label>Categoria</label><input id="newCat" placeholder="Herbicida, Fungicida..."></div>
-      <div><label>Formulação confirmada</label><input id="newForm" placeholder="SC, EC, SL, WG..."></div>
-      <div><label>Observação</label><input id="newObs"></div>
-    </div>
-    <button class="primary" id="addCatalog" style="margin-top:10px">Adicionar ao catálogo</button>
-  </div>
-  <div class="card">
-    <h2>🔐 Segurança da Oficina</h2>
-    <p class="sub">Altere o código de acesso da Oficina neste aparelho. Para que a área seja realmente exclusiva para você em vários aparelhos, a versão com contas/login precisará de autenticação no servidor.</p>
-    <div class="row">
-      <input id="newOfficePin" type="password" inputmode="numeric" placeholder="Novo código">
-      <button class="secondary fit" id="changeOfficePin">Alterar código</button>
-    </div>
-    <button class="warn" id="lockOffice" style="margin-top:10px">Bloquear Oficina</button>
-  </div>
-  </div>
-</section>
+<section class="card"><div class="note"><b>Importante:</b> a ordem abaixo segue a tabela fornecida. Dose, compatibilidade, cultura autorizada e preparo devem ser conferidos na bula/rótulo e com o fabricante.</div></section>
 </main>
-<footer>Bontempo Agro 6.2 • Ferramenta de cálculo e organização. Não substitui bula/rótulo, responsável técnico ou exigências legais.</footer>
-
 <script>
-const CATALOG = [{"nome": "Glifosato", "aliases": ["glyphosate", "roundup", "glifosato"], "categoria": "Herbicida", "formulacoes": ["SL", "SG"], "obs": "Dose e formulação variam por produto e cultura."}, {"nome": "Glufosinato de amônio", "aliases": ["glufosinato", "glufosinate"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Confirmar registro, cultura e rótulo."}, {"nome": "2,4-D", "aliases": ["24d", "2 4 d"], "categoria": "Herbicida", "formulacoes": ["SL", "EC"], "obs": "Formulações e restrições variam por produto."}, {"nome": "Dicamba", "aliases": ["dicamba"], "categoria": "Herbicida", "formulacoes": ["SL", "SG"], "obs": "Confirmar condições de uso e deriva."}, {"nome": "Atrazina", "aliases": ["atrazine", "atrazina"], "categoria": "Herbicida", "formulacoes": ["SC", "WG"], "obs": "Confirmar cultura e rótulo."}, {"nome": "Cletodim", "aliases": ["clethodim", "cletodim"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Confirmar adjuvante indicado no rótulo."}, {"nome": "Haloxifope-P-metílico", "aliases": ["haloxyfop", "haloxifope"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Confirmar formulação comercial."}, {"nome": "Fomesafem", "aliases": ["fomesafen", "fomesafem"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Confirmar cultura e rótulo."}, {"nome": "Metsulfurom-metílico", "aliases": ["metsulfuron", "metsulfurom"], "categoria": "Herbicida", "formulacoes": ["WG"], "obs": "Confirmar compatibilidade e cultura."}, {"nome": "S-metolacloro", "aliases": ["s-metolachlor", "metolacloro"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Confirmar formulação e cultura."}, {"nome": "Lambda-cialotrina", "aliases": ["lambda cyhalothrin", "lambda-cialotrina"], "categoria": "Inseticida", "formulacoes": ["EC", "CS"], "obs": "Não preencher dose automaticamente."}, {"nome": "Clorantraniliprole", "aliases": ["chlorantraniliprole", "clorantraniliprole"], "categoria": "Inseticida", "formulacoes": ["SC", "WG"], "obs": "Confirmar formulação comercial."}, {"nome": "Tiametoxam", "aliases": ["thiamethoxam", "tiametoxam"], "categoria": "Inseticida", "formulacoes": ["WG", "SC"], "obs": "Confirmar produto registrado."}, {"nome": "Imidacloprido", "aliases": ["imidacloprid", "imidacloprido"], "categoria": "Inseticida", "formulacoes": ["SC", "SL", "WG"], "obs": "Confirmar cultura e rótulo."}, {"nome": "Acefato", "aliases": ["acephate", "acefato"], "categoria": "Inseticida", "formulacoes": ["SP", "WG"], "obs": "Confirmar formulação."}, {"nome": "Espinetoram", "aliases": ["spinetoram", "espinetoram"], "categoria": "Inseticida", "formulacoes": ["SC"], "obs": "Confirmar rótulo e intervalo de segurança."}, {"nome": "Tebufenozida", "aliases": ["tebufenozide", "tebufenozida"], "categoria": "Inseticida", "formulacoes": ["SC"], "obs": "Confirmar registro e formulação."}, {"nome": "Abamectina", "aliases": ["abamectin", "abamectina"], "categoria": "Inseticida/Acaricida", "formulacoes": ["EC", "SC"], "obs": "Confirmar formulação e cultura."}, {"nome": "Azoxistrobina", "aliases": ["azoxystrobin", "azoxistrobina"], "categoria": "Fungicida", "formulacoes": ["SC", "WG"], "obs": "Confirmar mistura e rótulo."}, {"nome": "Picoxistrobina", "aliases": ["picoxystrobin", "picoxistrobina"], "categoria": "Fungicida", "formulacoes": ["SC", "EC"], "obs": "Confirmar formulação comercial."}, {"nome": "Piraclostrobina", "aliases": ["pyraclostrobin", "piraclostrobina"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Confirmar formulação."}, {"nome": "Tebuconazol", "aliases": ["tebuconazole", "tebuconazol"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Confirmar produto e cultura."}, {"nome": "Difenoconazol", "aliases": ["difenoconazole", "difenoconazol"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Confirmar formulação."}, {"nome": "Mancozebe", "aliases": ["mancozeb", "mancozebe"], "categoria": "Fungicida", "formulacoes": ["WP", "WG"], "obs": "Confirmar compatibilidade."}, {"nome": "Clorotalonil", "aliases": ["chlorothalonil", "clorotalonil"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Confirmar rótulo e cultura."}, {"nome": "Fluxapiroxade", "aliases": ["fluxapyroxad", "fluxapiroxade"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Confirmar formulação comercial."}, {"nome": "Boro", "aliases": ["boro", "ácido bórico"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Concentração e fonte variam por produto."}, {"nome": "Zinco", "aliases": ["zinco", "zn"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Concentração varia por produto."}, {"nome": "Manganês", "aliases": ["manganes", "mn"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Concentração varia por produto."}, {"nome": "Óleo mineral", "aliases": ["óleo mineral", "oleo mineral"], "categoria": "Adjuvante/Óleo", "formulacoes": ["EO"], "obs": "Usar somente conforme rótulo."}, {"nome": "Óleo vegetal", "aliases": ["óleo vegetal", "oleo vegetal"], "categoria": "Adjuvante/Óleo", "formulacoes": ["EO"], "obs": "Usar somente conforme rótulo."}, {"nome": "Espalhante adesivo", "aliases": ["espalhante", "adesivo", "espalhante adesivo"], "categoria": "Adjuvante", "formulacoes": ["EA"], "obs": "Produto específico deve ser cadastrado para dose."}, {"nome": "Redutor de pH", "aliases": ["ph", "redutor de ph", "acidificante"], "categoria": "Condicionador de calda", "formulacoes": ["Especial"], "obs": "A dose depende do produto e da qualidade da água."}];
-const EXTRA_CATALOG = [{"nome": "Glifosato 480", "aliases": ["Glifosato 480"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Glifosato 720", "aliases": ["Glifosato 720"], "categoria": "Herbicida", "formulacoes": ["SG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Glufosinato", "aliases": ["Glufosinato"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "2,4-D", "aliases": ["2,4-D"], "categoria": "Herbicida", "formulacoes": ["SL", "EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Dicamba", "aliases": ["Dicamba"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Atrazina", "aliases": ["Atrazina"], "categoria": "Herbicida", "formulacoes": ["SC", "WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Cletodim", "aliases": ["Cletodim"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Haloxifope", "aliases": ["Haloxifope"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Fomesafem", "aliases": ["Fomesafem"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Metsulfurom-metílico", "aliases": ["Metsulfurom-metílico"], "categoria": "Herbicida", "formulacoes": ["WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "S-metolacloro", "aliases": ["S-metolacloro"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Imazapique", "aliases": ["Imazapique"], "categoria": "Herbicida", "formulacoes": ["WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Imazapir", "aliases": ["Imazapir"], "categoria": "Herbicida", "formulacoes": ["SL"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Saflufenacil", "aliases": ["Saflufenacil"], "categoria": "Herbicida", "formulacoes": ["WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Flumioxazina", "aliases": ["Flumioxazina"], "categoria": "Herbicida", "formulacoes": ["WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Sulfentrazona", "aliases": ["Sulfentrazona"], "categoria": "Herbicida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Clorimuron-etílico", "aliases": ["Clorimuron-etílico"], "categoria": "Herbicida", "formulacoes": ["WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Triclopir", "aliases": ["Triclopir"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Fluazifope-P-butílico", "aliases": ["Fluazifope-P-butílico"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Quizalofope-P-etílico", "aliases": ["Quizalofope-P-etílico"], "categoria": "Herbicida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Lambda-cialotrina", "aliases": ["Lambda-cialotrina"], "categoria": "Inseticida", "formulacoes": ["EC", "CS"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Clorantraniliprole", "aliases": ["Clorantraniliprole"], "categoria": "Inseticida", "formulacoes": ["SC", "WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Tiametoxam", "aliases": ["Tiametoxam"], "categoria": "Inseticida", "formulacoes": ["WG", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Imidacloprido", "aliases": ["Imidacloprido"], "categoria": "Inseticida", "formulacoes": ["SC", "SL", "WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Acefato", "aliases": ["Acefato"], "categoria": "Inseticida", "formulacoes": ["SP", "WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Espinetoram", "aliases": ["Espinetoram"], "categoria": "Inseticida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Abamectina", "aliases": ["Abamectina"], "categoria": "Inseticida/Acaricida", "formulacoes": ["EC", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Bifentrina", "aliases": ["Bifentrina"], "categoria": "Inseticida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Fipronil", "aliases": ["Fipronil"], "categoria": "Inseticida", "formulacoes": ["SC", "WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Indoxacarbe", "aliases": ["Indoxacarbe"], "categoria": "Inseticida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Metomil", "aliases": ["Metomil"], "categoria": "Inseticida", "formulacoes": ["SL", "SP"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Piriproxifem", "aliases": ["Piriproxifem"], "categoria": "Inseticida", "formulacoes": ["EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Acetamiprido", "aliases": ["Acetamiprido"], "categoria": "Inseticida", "formulacoes": ["SL", "SP"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Ciantraniliprole", "aliases": ["Ciantraniliprole"], "categoria": "Inseticida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Azoxistrobina", "aliases": ["Azoxistrobina"], "categoria": "Fungicida", "formulacoes": ["SC", "WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Picoxistrobina", "aliases": ["Picoxistrobina"], "categoria": "Fungicida", "formulacoes": ["SC", "EC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Piraclostrobina", "aliases": ["Piraclostrobina"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Tebuconazol", "aliases": ["Tebuconazol"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Difenoconazol", "aliases": ["Difenoconazol"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Mancozebe", "aliases": ["Mancozebe"], "categoria": "Fungicida", "formulacoes": ["WP", "WG"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Clorotalonil", "aliases": ["Clorotalonil"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Fluxapiroxade", "aliases": ["Fluxapiroxade"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Protioconazol", "aliases": ["Protioconazol"], "categoria": "Fungicida", "formulacoes": ["EC", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Epoxiconazol", "aliases": ["Epoxiconazol"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Bixafem", "aliases": ["Bixafem"], "categoria": "Fungicida", "formulacoes": ["SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Trifloxistrobina", "aliases": ["Trifloxistrobina"], "categoria": "Fungicida", "formulacoes": ["WG", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Enxofre", "aliases": ["Enxofre"], "categoria": "Fungicida", "formulacoes": ["WG", "SC"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Boro", "aliases": ["Boro"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Zinco", "aliases": ["Zinco"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Manganês", "aliases": ["Manganês"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Molibdênio", "aliases": ["Molibdênio"], "categoria": "Adubo foliar", "formulacoes": ["Especial"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Óleo mineral", "aliases": ["Óleo mineral"], "categoria": "Adjuvante/Óleo", "formulacoes": ["EO"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Óleo vegetal", "aliases": ["Óleo vegetal"], "categoria": "Adjuvante/Óleo", "formulacoes": ["EO"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Espalhante adesivo", "aliases": ["Espalhante adesivo"], "categoria": "Adjuvante", "formulacoes": ["EA"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Redutor de pH", "aliases": ["Redutor de pH"], "categoria": "Condicionador de calda", "formulacoes": ["Especial"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}, {"nome": "Antiespumante", "aliases": ["Antiespumante"], "categoria": "Adjuvante", "formulacoes": ["Especial"], "obs": "Produto de referência. Confirmar produto comercial, bula/rótulo e formulação antes do uso."}];
-const MIX_ORDER = [["Água", "Água", "-"], ["Condicionador de calda", "Redutor de pH", "—"], ["Grânulos dispersíveis em água", "WG/WP", "WG/WP"], ["Pó molhável", "PM", "PM"], ["Dry Flowable", "DF", "DF"], ["Suspensão concentrada", "SC", "SC"], ["Emulsão em água", "EW", "EW"], ["Micro emulsão", "ME", "ME"], ["Espalhante adesivo", "EA", "EA"], ["Óleo emulsionado", "EO", "EO"], ["Concentrado emulsionável", "EC", "EC"], ["Concentrado/líquido solúvel", "SL", "SL"], ["Solução aquosa não concentrada", "SANC", "SANC"], ["Solução aquosa concentrada", "SAC", "SAC"], ["Ácido bórico / adubo foliar / adjuvantes", "Especial", "—"]];
-const STORAGE = {history:'bontempo5_history', settings:'bontempo5_settings', custom:'bontempo5_custom', pin:'bontempo5_pin', searchEndpoint:'bontempo6_search_endpoint'};
-const DEFAULT_OWNER_PIN = '5555'; // proteção local de interface; não é autenticação de servidor
-let officeUnlocked = sessionStorage.getItem('bontempo5_office')==='1';
-let products = [];
-let settings = JSON.parse(localStorage.getItem(STORAGE.settings)||'null') || {
-  name:'Bontempo Agro', subtitle:'Pulverização agrícola',
-  safety:'Use sempre a dose, formulação e orientação do rótulo/bula do produto registrado. Verifique compatibilidade e exigências legais antes do preparo.'
-};
-document.getElementById('safetyText').value=settings.safety;
+const order=[
+["WG/WP","Grânulos Dispersáveis em Água"],["PM","Pó Molhável"],["DF","Dry Flowable"],["SC","Suspensão Concentrada"],
+["EW","Emulsão em Água"],["ME","Micro Emulsão"],["EA","Espalhante Adesivo"],["EO","Óleo Emulsionado"],
+["EC","Concentrado Emulsionável"],["SL","Concentrado/Líquido Solúvel"],["SANC","Solução Aquosa não Concentrada"],
+["SAC","Solução Aquosa Concentrada"],["OUTROS","Ácido Bórico / Adubo foliar ou Adjuvantes"]];
+const cats=["Herbicida","Inseticida","Fungicida","Adubo","Adjuvante","Redutor de pH","Óleo","Outro"];
+const units=["L/ha","mL/ha","kg/ha","g/ha"];
+function esc(x){return String(x||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function render(){
+ let n=+count.value, old=[...document.querySelectorAll(".product")].map(p=>[p.querySelector(".name").value,p.querySelector(".cat").value,p.querySelector(".form").value,p.querySelector(".dose").value,p.querySelector(".unit").value]);
+ products.innerHTML="";
+ for(let i=0;i<n;i++){let x=old[i]||["","","","0","L/ha"];
+ let co=cats.map(v=>`<option ${x[1]==v?"selected":""}>${v}</option>`).join("");
+ let fo=order.map(v=>`<option value="${v[0]}" ${x[2]==v[0]?"selected":""}>${v[0]} — ${v[1]}</option>`).join("");
+ let u=units.map(v=>`<option ${x[4]==v?"selected":""}>${v}</option>`).join("");
+ products.insertAdjacentHTML("beforeend",`<div class="product"><div class="pt">Produto ${i+1}</div><div class="pg">
+<div><label>Nome do produto</label><input class="name" placeholder="Digite o nome" value="${esc(x[0])}"></div>
+<div><label>Categoria</label><select class="cat">${co}</select></div>
+<div><label>Formulação</label><select class="form"><option value="">Selecione</option>${fo}</select></div>
+<div><label>Dose por ha</label><input class="dose" type="number" min="0" step="0.001" value="${esc(x[3])}" placeholder="Ex.: 0,5"></div>
+<div><label>Unidade</label><select class="unit">${u}</select></div></div></div>`)}}
+function idx(f){let i=order.findIndex(x=>x[0]==f);return i<0?999:i}
+function qty(q,u){return q.toLocaleString("pt-BR",{maximumFractionDigits:u.includes("mL")||u.includes("g")?0:3})+" "+u.replace("/ha","")}
+function calc(){
+ err.textContent="";let a=+area.value,v=+lha.value;if(!(a>0&&v>0)){err.textContent="Informe área e volume (L/ha).";return}
+ let r=[...document.querySelectorAll(".product")].map((p,i)=>({i:i+1,n:p.querySelector(".name").value.trim(),c:p.querySelector(".cat").value,f:p.querySelector(".form").value,d:+p.querySelector(".dose").value,u:p.querySelector(".unit").value}));
+ let bad=r.find(x=>!x.n||!x.f||!(x.d>0));if(bad){err.textContent="Preencha nome, formulação e dose do Produto "+bad.i+".";return}
+ r.sort((x,y)=>idx(x.f)-idx(y.f)||x.i-y.i);water.textContent="Água total: "+(a*v).toLocaleString("pt-BR",{maximumFractionDigits:2})+" L";
+ list.innerHTML=r.map((x,i)=>{let o=order.find(z=>z[0]==x.f);return `<div class="mix"><b>${i+1}. ${esc(x.n)}</b><div>${esc(x.c)} • ${x.f} — ${o?o[1]:""}</div><span class="badge">Total: ${qty(x.d*a,x.u)}</span><div class="note">Dose: ${x.d.toLocaleString("pt-BR")} ${x.u} por ha</div></div>`}).join("");
+ result.style.display="block";document.getElementById("saveBtn").style.display="block";result.scrollIntoView({behavior:"smooth"});
+}
 
-function $(id){return document.getElementById(id)}
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function num(id){return Number($(id).value)||0}
-function fmt(n){return new Intl.NumberFormat('pt-BR',{maximumFractionDigits:3}).format(n)}
-function totalL(){return num('area')*num('volHa')}
-function allCatalog(){return CATALOG.concat(EXTRA_CATALOG).concat(JSON.parse(localStorage.getItem(STORAGE.custom)||'[]'))}
-function normalize(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')}
-function findCatalog(q){
-  const n=normalize(q); if(!n) return [];
-  return allCatalog().filter(x=>normalize(x.nome).includes(n)||x.aliases?.some(a=>normalize(a).includes(n))).slice(0,8)
+function toggleTable(){
+  const el=document.getElementById("formTable");
+  el.style.display=el.style.display==="block"?"none":"block";
 }
-function orderIndex(form){
-  const f=String(form||'').toUpperCase().trim();
-  const i=MIX_ORDER.findIndex(x=>x[2]===f||x[1]===f);
-  return i<0?999:i+1;
+function getCurrentData(){
+  const a=+area.value,v=+lha.value;
+  const r=[...document.querySelectorAll(".product")].map((p,i)=>({
+    i:i+1,n:p.querySelector(".name").value.trim(),c:p.querySelector(".cat").value,
+    f:p.querySelector(".form").value,d:+p.querySelector(".dose").value,u:p.querySelector(".unit").value
+  }));
+  return {area:a,lha:v,products:r,createdAt:new Date().toLocaleString("pt-BR")};
 }
-
-function uniqueCategories(){
-  return [...new Set(allCatalog().map(x=>x.categoria).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
-}
-function renderPicker(){
-  const search=normalize($('pickerSearch')?.value||'');
-  const cat=$('pickerCategory')?.value||'';
-  const arr=allCatalog().filter(x=>(!cat||x.categoria===cat)&&(!search||normalize(x.nome).includes(search)||x.aliases?.some(a=>normalize(a).includes(search)))).slice(0,80);
-  $('pickerList').innerHTML=arr.length?arr.map((x,i)=>`<button class="pickerItem" onclick="selectCatalogProduct(${JSON.stringify(x.nome).replace(/"/g,'&quot;')})"><b>${esc(x.nome)}</b><span>${esc(x.categoria)} • ${esc((x.formulacoes||[]).join(', '))}</span></button>`).join(''):'<div class="sub">Nenhum produto encontrado. Use “Digitar produto” para cadastrar manualmente na calda.</div>';
-}
-function selectCatalogProduct(name){
-  const x=allCatalog().find(a=>a.nome===name); if(!x)return;
-  products.push({name:x.nome,cat:x.categoria,form:(x.formulacoes||[])[0]||'',dose:'',unit:'L/ha',match:x});
-  sortProductsSilent();
-  $('pickerPanel').style.display='none';
-  window.scrollTo({top:document.getElementById('products').offsetTop-120,behavior:'smooth'});
-}
-async function sha256(s){
-  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
-  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-async function ensurePin(){
-  if(!localStorage.getItem(STORAGE.pin)) localStorage.setItem(STORAGE.pin, await sha256(DEFAULT_OWNER_PIN));
-}
-async function unlockOffice(){
-  await ensurePin();
-  const pin=prompt('Código da Oficina:');
-  if(pin===null)return;
-  const ok=(await sha256(pin))===localStorage.getItem(STORAGE.pin);
-  if(!ok){alert('Código incorreto.');return;}
-  officeUnlocked=true;sessionStorage.setItem('bontempo5_office','1');renderOfficeLock();show('oficina');
-}
-function renderOfficeLock(){
-  $('officeLocked').style.display=officeUnlocked?'none':'block';
-  $('officeContent').style.display=officeUnlocked?'block':'none';
-}
-async function changeOfficePin(){
-  if(!officeUnlocked)return;
-  const pin=$('newOfficePin').value.trim();
-  if(pin.length<4){alert('Use pelo menos 4 caracteres.');return}
-  localStorage.setItem(STORAGE.pin,await sha256(pin));$('newOfficePin').value='';alert('Código da Oficina alterado neste aparelho.');
-}
-function lockOffice(){officeUnlocked=false;sessionStorage.removeItem('bontempo5_office');renderOfficeLock();show('calda')}
-function getSearchEndpoint(){return localStorage.getItem(STORAGE.searchEndpoint)||''}
-function saveSearchEndpoint(){if(!officeUnlocked)return alert('Desbloqueie a Oficina.');const v=$('searchEndpoint').value.trim();if(v)localStorage.setItem(STORAGE.searchEndpoint,v);else localStorage.removeItem(STORAGE.searchEndpoint);alert(v?'Endpoint salvo.':'Endpoint removido.')}
-function normalizeOnlineResult(raw,query){
-  const x=raw?.product||raw?.result||raw;
-  if(!x||typeof x!=='object') return null;
-  return {nome:x.nome||x.name||query,principioAtivo:x.principioAtivo||x.activeIngredient||x.active_ingredient||'',categoria:x.categoria||x.category||'Outro',formulacao:x.formulacao||x.formulation||'',concentracao:x.concentracao||x.concentration||'',fabricante:x.fabricante||x.manufacturer||'',registro:x.registro||x.registration||'',culturas:x.culturas||x.crops||'',fonte:x.fonte||x.source||x.url||'',observacao:x.observacao||x.notes||'',confidence:x.confidence??x.confianca??null};
-}
-function normalizeOnlineResults(raw,query){
-  const list=Array.isArray(raw)?raw:(Array.isArray(raw?.results)?raw.results:Array.isArray(raw?.products)?raw.products:null);
-  if(!list) return [];
-  return list.map(x=>normalizeOnlineResult(x,query)).filter(Boolean);
-}
-function selectOnlineProduct(data,targetIndex){
-  if(!data)return;
-  let idx=targetIndex;
-  if(idx===null || idx===undefined || !products[idx]){
-    idx=products.findIndex(p=>!String(p.name||'').trim());
-    if(idx<0){ products.push({name:'',cat:'',form:'',dose:'',unit:'L/ha',match:null}); idx=products.length-1; }
+function saveMix(){
+  const data=getCurrentData();
+  if(!(data.area>0&&data.lha>0)||data.products.some(x=>!x.n||!x.f||!(x.d>0))){
+    err.textContent="Calcule uma calda preenchida antes de salvar."; return;
   }
-  products[idx].name=data.nome||'';
-  products[idx].cat=data.categoria||'Outro';
-  products[idx].form=data.formulacao||'';
-  products[idx].match=null;
-  products[idx].online={principioAtivo:data.principioAtivo||'',concentracao:data.concentracao||'',fabricante:data.fabricante||'',registro:data.registro||'',fonte:data.fonte||''};
-  renderProducts();
-  $('onlineProductName').value=data.nome||'';
-  $('onlineSearchResult').innerHTML='<div class="success"><b>✓ Produto adicionado à calda.</b><br><span class="small">Ele foi colocado no produto '+(idx+1)+' e os dados encontrados foram preenchidos. Você ainda deve conferir a bula/rótulo.</span></div>';
-  setTimeout(()=>document.getElementById('products')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
+  const name=prompt("Nome desta calda:", data.products.map(x=>x.n).join(" + "));
+  if(!name) return;
+  data.name=name.trim();
+  const hist=JSON.parse(localStorage.getItem("bontempo_history")||"[]");
+  hist.unshift(data);
+  localStorage.setItem("bontempo_history",JSON.stringify(hist.slice(0,50)));
+  renderHistory();
+  alert("✓ Calda salva no histórico.");
 }
-function getOnlineDetail(){
-  return {nome:$('onlineNome')?.value.trim()||'',principioAtivo:$('onlineAtivo')?.value.trim()||'',categoria:$('onlineCat')?.value.trim()||'Outro',formulacao:$('onlineForm')?.value.trim()||'',concentracao:$('onlineConc')?.value.trim()||'',fabricante:$('onlineFab')?.value.trim()||'',registro:$('onlineReg')?.value.trim()||'',culturas:$('onlineCult')?.value.trim()||'',fonte:$('onlineFonte')?.value.trim()||'',observacao:$('onlineObs')?.value.trim()||''};
-}
-function renderOnlineResult(data,query,err,targetIndex=null){
-  const box=$('onlineSearchResult');
-  if(err){box.innerHTML=`<div class="error"><b>Pesquisa online ainda não configurada.</b><br>${esc(err)}<br><span class="small">Para não tirar o cliente do aplicativo e não causar o bug anterior, a V6.4 não abre mais o Google automaticamente.</span><div class="row" style="margin-top:10px"><button class="primary fit" onclick="prepareManualProduct(${JSON.stringify(query)})">✍️ Adicionar este nome à calda</button><button class="secondary fit" onclick="show('oficina');document.getElementById('searchEndpoint')?.focus()">⚙️ Configurar pesquisa online</button></div></div>`;return}
-  if(Array.isArray(data)){
-    if(!data.length){box.innerHTML='<div class="error">Nenhum resultado encontrado. Tente o nome comercial completo.</div>';return}
-    box.innerHTML=`<div class="success"><b>Resultados encontrados</b><br><span class="small">Toque em um produto para colocá-lo automaticamente na calda.</span>${data.map((d,i)=>`<button class="pickerItem" style="width:100%;text-align:left;margin-top:8px" onclick="selectOnlineProduct(window.__onlineResults[${i}],${targetIndex===null?'null':targetIndex})"><b>${esc(d.nome)}</b><span>${esc(d.fabricante||'Fabricante não informado')} • ${esc(d.formulacao||'Formulação não informada')} • ${esc(d.categoria||'Outro')}</span></button>`).join('')}</div>`;
-    window.__onlineResults=data; return;
-  }
-  if(!data){box.innerHTML='<div class="error">Nenhum dado estruturado foi encontrado. Confira o nome comercial e tente novamente.</div>';return}
-  box.innerHTML=`<div class="success"><b>Produto encontrado para revisão</b><br><span class="small">Selecione este resultado para colocá-lo diretamente na calda, ou aprove-o na Oficina para o catálogo oficial.</span>
-    <div class="grid" style="margin-top:10px"><div><label>Nome</label><input id="onlineNome" value="${esc(data.nome)}"></div><div><label>Princípio ativo</label><input id="onlineAtivo" value="${esc(data.principioAtivo)}"></div><div><label>Categoria</label><input id="onlineCat" value="${esc(data.categoria)}"></div><div><label>Formulação</label><input id="onlineForm" value="${esc(data.formulacao)}"></div><div><label>Concentração</label><input id="onlineConc" value="${esc(data.concentracao)}"></div><div><label>Fabricante</label><input id="onlineFab" value="${esc(data.fabricante)}"></div><div><label>Registro</label><input id="onlineReg" value="${esc(data.registro)}"></div><div><label>Culturas</label><input id="onlineCult" value="${esc(data.culturas)}"></div></div>
-    <label>Fonte</label><input id="onlineFonte" value="${esc(data.fonte)}"><label>Observação</label><textarea id="onlineObs">${esc(data.observacao||'Conferir bula/rótulo e registro antes de aprovar.')}</textarea>
-    <div class="row" style="margin-top:10px"><button class="primary fit" onclick="selectOnlineProduct(getOnlineDetail(),${targetIndex===null?'null':targetIndex})">➕ Usar este produto na calda</button><button class="secondary fit" onclick="approveOnlineProduct()">🔐 Aprovar no catálogo</button><button class="secondary fit" onclick="document.getElementById('onlineSearchResult').innerHTML=''">Cancelar</button></div></div>`;
-}
-function openWebSearch(query){
-  alert('A pesquisa externa foi desativada nesta versão para não tirar o cliente do Bontempo Agro. Configure o endpoint de pesquisa na Oficina para trazer resultados selecionáveis dentro do app.');
-}
-function prepareManualProduct(query){
-  const q=String(query||'').trim();
-  if(!q)return;
-  const idx=products.findIndex(p=>!p.name);
-  if(idx>=0){products[idx].name=q;products[idx].match=null;renderProducts();return;}
-  products.push({name:q,cat:'',form:'',dose:'',unit:'L/ha',match:null});renderProducts();
-}
-
-async function searchOnlineProduct(targetIndex=null){
-  const q=$('onlineProductName').value.trim(); if(!q)return alert('Digite o nome do produto.');
-  const ep=getSearchEndpoint();
-  if(!ep){renderOnlineResult(null,q,'Configure o endpoint de pesquisa na Oficina.');return}
-  $('onlineSearchResult').innerHTML='<div class="notice">🔎 Pesquisando informações públicas…</div>';
-  try{
-    const url=ep.includes('?')?ep+'&q='+encodeURIComponent(q):ep+'?q='+encodeURIComponent(q);
-    const r=await fetch(url,{headers:{Accept:'application/json'}}); if(!r.ok)throw new Error('Servidor respondeu HTTP '+r.status);
-    const raw=await r.json();
-    const results=normalizeOnlineResults(raw,q);
-    if(results.length>1) renderOnlineResult(results,q,null,targetIndex);
-    else if(results.length===1) renderOnlineResult(results[0],q,null,targetIndex);
-    else {const one=normalizeOnlineResult(raw,q);renderOnlineResult(one,q,null,targetIndex);}
-  }catch(e){renderOnlineResult(null,q,e.message||'erro de conexão')}
-}
-function approveOnlineProduct(){
-  if(!officeUnlocked)return alert('Somente a Oficina pode aprovar produtos.');
-  const x={nome:$('onlineNome').value.trim(),aliases:normalize($('onlineNome').value).split(/\s+/),categoria:$('onlineCat').value.trim()||'Outro',formulacoes:[$('onlineForm').value.trim()||'Especial'],obs:`Princípio ativo: ${$('onlineAtivo').value.trim()||'não informado'}. Concentração: ${$('onlineConc').value.trim()||'não informada'}. Fabricante: ${$('onlineFab').value.trim()||'não informado'}. Registro: ${$('onlineReg').value.trim()||'não informado'}. Culturas: ${$('onlineCult').value.trim()||'não informadas'}. Fonte: ${$('onlineFonte').value.trim()||'não informada'}. ${$('onlineObs').value.trim()}`};
-  if(!x.nome)return alert('Informe o nome do produto.');
-  const a=JSON.parse(localStorage.getItem(STORAGE.custom)||'[]'); const idx=a.findIndex(y=>normalize(y.nome)===normalize(x.nome)); if(idx>=0)a[idx]=x;else a.push(x); localStorage.setItem(STORAGE.custom,JSON.stringify(a)); renderCatalog(); alert('Produto aprovado e adicionado ao catálogo da Oficina neste aparelho.'); $('onlineSearchResult').innerHTML='';
-}
-function renderProducts(){
-  $('prodCount').textContent=products.length;
-  $('products').innerHTML=products.length?products.map((p,i)=>`
-  <div class="product">
-    <button class="warn remove" onclick="removeProduct(${i})">Remover</button>
-    <h3>Produto ${i+1} ${p.match?'• cadastrado':'• manual'}</h3>
-    <div class="searchbox">
-      <label>Nome / princípio ativo</label>
-      <input value="${esc(p.name)}" oninput="editProductFreeText(${i},this.value);suggestProduct(${i},this.value)" autocomplete="off" placeholder="Digite livremente o nome do produto">
-      <div id="sug${i}" class="suggestions" style="display:none"></div>
-      <div class="row" style="margin-top:7px">
-        <button type="button" class="secondary fit" onclick="searchThisProductOnline(${i})">🔎 Pesquisar este produto</button>
-      </div>
-    </div>
-    <div class="grid">
-      <div><label>Categoria</label><input value="${esc(p.cat)}" oninput="editProduct(${i},'cat',this.value)"></div>
-      <div><label>Formulação</label><select onchange="editProduct(${i},'form',this.value)"><option value="">Selecione/CONFIRA</option>${['WG','WP','DF','SC','EW','ME','EA','EO','EC','SL','SANC','SAC','Especial'].map(f=>`<option ${p.form===f?'selected':''}>${f}</option>`).join('')}</select></div>
-      <div><label>Dose/ha</label><input type="number" min="0" step="0.001" value="${p.dose}" oninput="editProduct(${i},'dose',this.value);renderSummary()"></div>
-      <div><label>Unidade</label><select onchange="editProduct(${i},'unit',this.value);renderSummary()">${['L/ha','mL/ha','kg/ha','g/ha'].map(u=>`<option ${p.unit===u?'selected':''}>${u}</option>`).join('')}</select></div>
-    </div>
-    ${p.match?`<div class="success" style="margin-top:10px"><b>Sugestão inteligente:</b> ${esc(p.match.nome)} • ${esc(p.match.categoria)} • formulações de referência: ${esc(p.match.formulacoes.join(', '))}<br><span class="small">${esc(p.match.obs)}</span></div>`:''}
-    ${p.form?`<div class="small" style="margin-top:8px">Posição de referência na tabela: ${orderIndex(p.form)===999?'não encontrada — conferir':orderIndex(p.form)}</div>`:''}
-  </div>`).join(''):'<p class="sub">Nenhum produto adicionado.</p>';
-  renderSummary();
-  renderMixPreview();
-}
-function renderMixPreview(){
-  const box=$('mixPreviewList');
-  if(!box)return;
-  if(!products.length){box.innerHTML='<p class="sub">Adicione produtos para montar a ordem.</p>';return}
-  const arr=products.map((p,i)=>({p,i,pos:orderIndex(p.form)})).sort((a,b)=>a.pos-b.pos||a.i-b.i);
-  box.innerHTML=arr.map((x,i)=>`<div class="stat" style="margin:7px 0"><b>${i+1}. ${esc(x.p.name||'Produto sem nome')}</b><span>${esc(x.p.form||'formulação não confirmada')} • ${x.pos===999?'conferir posição':'posição '+x.pos}</span></div>`).join('');
-}
-function addProduct(){
-  products.push({name:'',cat:'',form:'',dose:'',unit:'L/ha',match:null});
-  renderProducts();
-}
-function addProductQty(){
-  const q=Math.max(1,Math.min(10,Number($('productQty').value)||1));
-  for(let i=0;i<q;i++) products.push({name:'',cat:'',form:'',dose:'',unit:'L/ha',match:null});
-  renderProducts();
-  window.scrollTo({top:document.getElementById('products').offsetTop-120,behavior:'smooth'});
-}
-function sortProductsByTable(){
-  if(!products.length){alert('Adicione produtos primeiro.');return}
-  products.forEach((p,i)=>p.__originalIndex=i);
-  products.sort((a,b)=>{
-    const oa=orderIndex(a.form), ob=orderIndex(b.form);
-    if(oa!==ob) return oa-ob;
-    return (a.__originalIndex??0)-(b.__originalIndex??0);
+function loadMix(i){
+  const hist=JSON.parse(localStorage.getItem("bontempo_history")||"[]");
+  const d=hist[i]; if(!d)return;
+  area.value=d.area; lha.value=d.lha; count.value=d.products.length; render();
+  d.products.forEach((x,j)=>{
+    const p=document.querySelectorAll(".product")[j];
+    p.querySelector(".name").value=x.n;p.querySelector(".cat").value=x.c;
+    p.querySelector(".form").value=x.f;p.querySelector(".dose").value=x.d;
+    p.querySelector(".unit").value=x.u;
   });
-  products.forEach(p=>delete p.__originalIndex);
-  renderProducts();
-  renderMixPreview();
-  alert('Produtos organizados conforme a tabela de ordem configurada no Bontempo Agro. Confira a bula/rótulo e a compatibilidade antes do preparo.');
+  calc();
 }
-function removeProduct(i){products.splice(i,1);renderProducts()}
-function editProductFreeText(i,v){
-  products[i].name=v;
-  products[i].match=null;
-  const box=$('sug'+i); if(box) box.style.display='none';
-  // Digitação livre: não força seleção, não re-renderiza o campo e não interrompe o usuário.
-  renderSummary();
-  renderMixPreview();
-}
-function useTypedProduct(i){
-  const name=(products[i].name||'').trim();
-  if(!name) return alert('Digite o nome do produto primeiro.');
-  products[i].name=name;
-  products[i].match=null;
-  renderProducts();
-}
-function searchThisProductOnline(i){
-  const name=(products[i].name||'').trim();
-  if(!name) return alert('Digite o nome do produto primeiro.');
-  $('onlineProductName').value=name;
-  document.getElementById('onlineSearchResult')?.scrollIntoView({behavior:'smooth',block:'center'});
-  searchOnlineProduct(i);
-}
-function editProduct(i,k,v){
-  products[i][k]=v;
-  if(k==='name'){
-    const m=findCatalog(v)[0]; products[i].match=m||null;
-  }
-  if(k==='form') renderProducts();
-}
-function suggestProduct(i,v){
-  const box=$('sug'+i); const arr=findCatalog(v);
-  if(!v||!arr.length){box.style.display='none';return}
-  box.innerHTML=arr.map((x,j)=>`<div onclick="chooseProduct(${i},${j},'${encodeURIComponent(JSON.stringify(x))}')"><b>${esc(x.nome)}</b><br><span class="small">${esc(x.categoria)} • ${esc(x.formulacoes.join(', '))}</span></div>`).join('');
-  box.style.display='block';
-  window.__sug=window.__sug||{}; window.__sug[i]=arr;
-}
-function chooseProduct(i,j){const x=(window.__sug||{})[i]?.[j];if(!x)return;products[i].name=x.nome;products[i].cat=x.categoria;products[i].match=x;products[i].form=x.formulacoes?.[0]||'';sortProductsSilent()}
-function sortProductsSilent(){products.sort((a,b)=>orderIndex(a.form)-orderIndex(b.form));renderProducts();}
-function renderSummary(){
-  $('totalAgua').textContent=fmt(totalL())+' L';
-  if(!products.length){$('summary').innerHTML='<p class="sub">Adicione produtos para gerar o resumo.</p>';return}
-  $('summary').innerHTML=products.map((p,i)=>{
-    const dose=Number(p.dose)||0, factor=p.unit==='L/ha'||p.unit==='kg/ha'?1:0.001;
-    const total=dose*num('area')*factor;
-    const unitOut=p.unit.startsWith('mL')?'L':p.unit.startsWith('g')?'kg':p.unit.split('/')[0];
-    const pos=orderIndex(p.form);
-    return `<div class="stat" style="margin:8px 0"><b>${i+1}. ${esc(p.name||'Produto sem nome')}</b><span>${esc(p.cat||'Categoria não informada')} • ${esc(p.form||'formulação não confirmada')}</span><br><strong>${fmt(total)} ${unitOut}</strong> no total • dose ${fmt(dose)} ${esc(p.unit)}${pos<999?` • ordem de referência ${pos}`:' • conferir ordem'}</div>`
-  }).join('');
-}
-function saveBatch(){
-  if(!num('area')||!num('volHa')){alert('Informe área e volume de aplicação.');return}
-  if(!products.length){alert('Adicione pelo menos um produto.');return}
-  const item={id:Date.now(),date:new Date().toLocaleString('pt-BR'),area:num('area'),volHa:num('volHa'),cultura:$('cultura').value,talhao:$('talhao').value,products:JSON.parse(JSON.stringify(products)),totalL:totalL()};
-  const h=JSON.parse(localStorage.getItem(STORAGE.history)||'[]');h.unshift(item);localStorage.setItem(STORAGE.history,JSON.stringify(h.slice(0,100)));
-  renderHistory(); alert('Calda salva no histórico.');
+function deleteMix(i){
+  if(!confirm("Excluir esta calda do histórico?"))return;
+  const hist=JSON.parse(localStorage.getItem("bontempo_history")||"[]");
+  hist.splice(i,1);localStorage.setItem("bontempo_history",JSON.stringify(hist));
+  renderHistory();
 }
 function renderHistory(){
-  const h=JSON.parse(localStorage.getItem(STORAGE.history)||'[]');
-  $('historyList').innerHTML=h.length?h.map(x=>`<div class="card historyItem"><b>${esc(x.cultura||'Cultura não informada')} ${x.talhao?'• '+esc(x.talhao):''}</b><span class="small">${esc(x.date)} • ${fmt(x.area)} ha • ${fmt(x.volHa)} L/ha • ${fmt(x.totalL)} L de calda</span><div style="margin-top:9px">${x.products.map(p=>`<span class="pill">${esc(p.name||'Produto')} • ${fmt(p.dose)} ${esc(p.unit)}</span>`).join('')}</div><div class="row" style="margin-top:10px"><button class="secondary fit" onclick="loadHistory(${x.id})">Abrir</button><button class="warn fit" onclick="deleteHistory(${x.id})">Excluir</button></div></div>`).join(''):'<div class="card"><p class="sub">Nenhuma calda salva ainda.</p></div>';
+  const hist=JSON.parse(localStorage.getItem("bontempo_history")||"[]");
+  const box=document.getElementById("history"), empty=document.getElementById("emptyHistory");
+  empty.style.display=hist.length?"none":"block";
+  box.innerHTML=hist.map((d,i)=>`<div class="history-item">
+    <div class="history-title">${esc(d.name)}</div>
+    <div class="history-meta">${esc(d.createdAt)} • ${d.area} ha • ${d.lha} L/ha • ${d.products.length} produto(s)</div>
+    <div class="small">${d.products.map(x=>esc(x.n)).join(" • ")}</div>
+    <div class="history-actions" style="margin-top:8px">
+      <button class="table-toggle" onclick="loadMix(${i})">↻ Reabrir</button>
+      <button style="background:#fdeaea;color:#c62828" onclick="deleteMix(${i})">Excluir</button>
+    </div>
+  </div>`).join("");
 }
-function loadHistory(id){
-  const x=JSON.parse(localStorage.getItem(STORAGE.history)||'[]').find(a=>a.id===id);if(!x)return;
-  $('area').value=x.area;$('volHa').value=x.volHa;$('cultura').value=x.cultura||'';$('talhao').value=x.talhao||'';products=x.products||[];renderProducts();show('calda');
-}
-function deleteHistory(id){let h=JSON.parse(localStorage.getItem(STORAGE.history)||'[]');h=h.filter(x=>x.id!==id);localStorage.setItem(STORAGE.history,JSON.stringify(h));renderHistory()}
-function renderCatalog(){
-  const arr=allCatalog();$('catalogTable').innerHTML=arr.map(x=>`<tr><td><b>${esc(x.nome)}</b>${x.aliases?.length?`<br><span class="small">${esc(x.aliases.slice(0,3).join(', '))}</span>`:''}</td><td>${esc(x.categoria)}</td><td>${esc(x.formulacoes.join(', '))}</td><td>${esc(x.obs)}</td></tr>`).join('');
-}
-function renderMix(){ $('mixBody').innerHTML=MIX_ORDER.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x[0])}</td><td>${esc(x[2])}</td></tr>`).join('') }
-function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo(0,0)}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{if(b.id==='officeNav'){return officeUnlocked?show('oficina'):unlockOffice()}show(b.dataset.view)});
-$('openPicker').onclick=()=>{const p=$('pickerPanel');p.style.display=p.style.display==='none'?'block':'none';renderPicker()};
-$('pickerSearch').oninput=renderPicker;$('pickerCategory').onchange=renderPicker;
-$('addProduct').onclick=addProduct;$('addProductQty').onclick=addProductQty;$('sortProducts').onclick=sortProductsByTable;$('searchOnlineProduct').onclick=searchOnlineProduct;$('clearProducts').onclick=()=>{products=[];renderProducts()};
-$('officeNav').onclick=()=>{if(officeUnlocked){show('oficina')}else{unlockOffice()}};
-$('unlockOffice').onclick=unlockOffice;$('saveSearchEndpoint').onclick=saveSearchEndpoint;$('testSearchEndpoint').onclick=()=>{if(!officeUnlocked)return alert('Desbloqueie a Oficina.');$('onlineProductName').value='';alert('Teste disponível pela pesquisa de produto na tela Nova calda.');};$('changeOfficePin').onclick=changeOfficePin;$('lockOffice').onclick=lockOffice;
-$('area').oninput=renderSummary;$('volHa').oninput=renderSummary;
-$('saveBatch').onclick=saveBatch;$('newBatch').onclick=()=>{products=[];$('cultura').value='';$('talhao').value='';renderProducts()};
-$('clearHistory').onclick=()=>{if(confirm('Apagar todo o histórico?')){localStorage.removeItem(STORAGE.history);renderHistory()}};
-$('catalogSearch').oninput=e=>{const arr=findCatalog(e.target.value),box=$('catalogSuggestions');if(!e.target.value||!arr.length){box.style.display='none';return}box.innerHTML=arr.map(x=>`<div><b>${esc(x.nome)}</b><br><span class="small">${esc(x.categoria)} • ${esc(x.formulacoes.join(', '))}</span></div>`).join('');box.style.display='block'};
-$('saveSettings').onclick=()=>{if(!officeUnlocked)return alert('Desbloqueie a Oficina.');settings.name=$('appName').value||'Bontempo Agro';settings.subtitle=$('appSubtitle').value||'Pulverização agrícola';settings.safety=$('safetyText').value;localStorage.setItem(STORAGE.settings,JSON.stringify(settings));alert('Configurações salvas.')};
-$('resetSettings').onclick=()=>{localStorage.removeItem(STORAGE.settings);location.reload()};
-$('addCatalog').onclick=()=>{if(!officeUnlocked)return alert('Desbloqueie a Oficina.');const x={nome:$('newName').value.trim(),aliases:normalize($('newName').value).split(/\\s+/),categoria:$('newCat').value.trim()||'Outro',formulacoes:[$('newForm').value.trim()||'Especial'],obs:$('newObs').value.trim()||'Confirmar rótulo/bula.'};if(!x.nome){alert('Informe o nome.');return}const a=JSON.parse(localStorage.getItem(STORAGE.custom)||'[]');a.push(x);localStorage.setItem(STORAGE.custom,JSON.stringify(a));$('newName').value='';$('newCat').value='';$('newForm').value='';$('newObs').value='';renderCatalog();alert('Produto adicionado.')};
-if($('searchEndpoint'))$('searchEndpoint').value=getSearchEndpoint();renderProducts();renderHistory();renderCatalog();renderMix();renderOfficeLock();
-const cats=uniqueCategories();$('pickerCategory').innerHTML='<option value="">Todas</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join('');renderPicker();
 
-</script>
-</body></html>
+render();
+renderHistory();
+</script></body></html>

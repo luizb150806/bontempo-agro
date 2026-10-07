@@ -1,10 +1,1 @@
-{
-  "name": "Bontempo Agro",
-  "short_name": "Bontempo Agro",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#f3f7f4",
-  "theme_color": "#063b20",
-  "lang": "pt-BR",
-  "description": "Calculadora e organizador de caldas para pulverização agrícola."
-}
+{"name":"Bontempo Agro","short_name":"Bontempo Agro","start_url":"./","display":"standalone","background_color":"#f4f7f5","theme_color":"#087a3b"}
