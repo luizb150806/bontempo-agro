@@ -282,11 +282,36 @@ function normalizeOnlineResult(raw,query){
   if(!x||typeof x!=='object') return null;
   return {nome:x.nome||x.name||query,principioAtivo:x.principioAtivo||x.activeIngredient||x.active_ingredient||'',categoria:x.categoria||x.category||'Outro',formulacao:x.formulacao||x.formulation||'',concentracao:x.concentracao||x.concentration||'',fabricante:x.fabricante||x.manufacturer||'',registro:x.registro||x.registration||'',culturas:x.culturas||x.crops||'',fonte:x.fonte||x.source||x.url||'',observacao:x.observacao||x.notes||'',confidence:x.confidence??x.confianca??null};
 }
-function renderOnlineResult(data,query,err){
+function normalizeOnlineResults(raw,query){
+  const list=Array.isArray(raw)?raw:(Array.isArray(raw?.results)?raw.results:Array.isArray(raw?.products)?raw.products:null);
+  if(!list) return [];
+  return list.map(x=>normalizeOnlineResult(x,query)).filter(Boolean);
+}
+function selectOnlineProduct(data,targetIndex){
+  if(!data)return;
+  if(targetIndex!==null && targetIndex!==undefined && products[targetIndex]){
+    products[targetIndex].name=data.nome||'';
+    products[targetIndex].cat=data.categoria||'Outro';
+    products[targetIndex].form=data.formulacao||'';
+    products[targetIndex].match=null;
+    renderProducts();
+    document.getElementById('onlineSearchResult').innerHTML='<div class=\"success\"><b>✓ Produto selecionado.</b> Ele foi colocado automaticamente na calda.</div>';
+    setTimeout(()=>document.getElementById('products')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
+    return;
+  }
+  $('onlineProductName').value=data.nome||'';
+  renderOnlineResult(data,data.nome||'');
+}
+function renderOnlineResult(data,query,err,targetIndex=null){
   const box=$('onlineSearchResult');
-  if(err){box.innerHTML=`<div class="error"><b>Pesquisa automática não configurada.</b><br>${esc(err)}<br><span class="small">O app não consegue consultar bancos de dados externos diretamente pelo GitHub Pages sem um servidor intermediário. Você ainda pode pesquisar o produto agora na internet e preencher os dados manualmente.</span><br><div class="row" style="margin-top:10px"><button class="secondary fit" onclick="openWebSearch(${JSON.stringify(query)})">🌐 Pesquisar na internet</button><button class="secondary fit" onclick="prepareManualProduct(${JSON.stringify(query)})">✍️ Usar este nome manualmente</button></div></div>`;return}
+  if(err){box.innerHTML=`<div class="error"><b>Pesquisa automática não configurada.</b><br>${esc(err)}<br><span class="small">Para selecionar um resultado e voltar automaticamente para a calda, a pesquisa precisa retornar resultados estruturados pelo endpoint configurado na Oficina.</span><br><div class="row" style="margin-top:10px"><button class="secondary fit" onclick="openWebSearch(${JSON.stringify(query)})">🌐 Pesquisar na internet</button><button class="secondary fit" onclick="prepareManualProduct(${JSON.stringify(query)})">✍️ Usar este nome manualmente</button></div></div>`;return}
+  if(Array.isArray(data)){
+    if(!data.length){box.innerHTML='<div class="error">Nenhum resultado encontrado. Tente o nome comercial completo.</div>';return}
+    box.innerHTML=`<div class="success"><b>Resultados encontrados</b><br><span class="small">Toque em um produto para colocá-lo automaticamente na calda.</span>${data.map((d,i)=>`<button class="pickerItem" style="width:100%;text-align:left;margin-top:8px" onclick="selectOnlineProduct(window.__onlineResults[${i}],${targetIndex===null?'null':targetIndex})"><b>${esc(d.nome)}</b><span>${esc(d.fabricante||'Fabricante não informado')} • ${esc(d.formulacao||'Formulação não informada')} • ${esc(d.categoria||'Outro')}</span></button>`).join('')}</div>`;
+    window.__onlineResults=data; return;
+  }
   if(!data){box.innerHTML='<div class="error">Nenhum dado estruturado foi encontrado. Confira o nome comercial e tente novamente.</div>';return}
-  box.innerHTML=`<div class="success"><b>Produto encontrado para revisão</b><br><span class="small">Nada é adicionado automaticamente ao catálogo oficial.</span>
+  box.innerHTML=`<div class="success"><b>Produto encontrado para revisão</b><br><span class="small">Selecione este resultado para colocá-lo diretamente na calda, ou aprove-o na Oficina para o catálogo oficial.</span>
     <div class="grid" style="margin-top:10px"><div><label>Nome</label><input id="onlineNome" value="${esc(data.nome)}"></div><div><label>Princípio ativo</label><input id="onlineAtivo" value="${esc(data.principioAtivo)}"></div><div><label>Categoria</label><input id="onlineCat" value="${esc(data.categoria)}"></div><div><label>Formulação</label><input id="onlineForm" value="${esc(data.formulacao)}"></div><div><label>Concentração</label><input id="onlineConc" value="${esc(data.concentracao)}"></div><div><label>Fabricante</label><input id="onlineFab" value="${esc(data.fabricante)}"></div><div><label>Registro</label><input id="onlineReg" value="${esc(data.registro)}"></div><div><label>Culturas</label><input id="onlineCult" value="${esc(data.culturas)}"></div></div>
     <label>Fonte</label><input id="onlineFonte" value="${esc(data.fonte)}"><label>Observação</label><textarea id="onlineObs">${esc(data.observacao||'Conferir bula/rótulo e registro antes de aprovar.')}</textarea>
     <div class="row" style="margin-top:10px"><button class="primary fit" onclick="approveOnlineProduct()">🔐 Aprovar e adicionar ao catálogo</button><button class="secondary fit" onclick="document.getElementById('onlineSearchResult').innerHTML=''">Cancelar</button></div></div>`;
@@ -305,15 +330,19 @@ function prepareManualProduct(query){
   products.push({name:q,cat:'',form:'',dose:'',unit:'L/ha',match:null});renderProducts();
 }
 
-async function searchOnlineProduct(){
+async function searchOnlineProduct(targetIndex=null){
   const q=$('onlineProductName').value.trim(); if(!q)return alert('Digite o nome do produto.');
   const ep=getSearchEndpoint();
-  if(!ep){renderOnlineResult(null,q,'Configure o endpoint na Oficina para obter dados estruturados dentro do app.');openWebSearch(q);return}
+  if(!ep){renderOnlineResult(null,q,'Configure o endpoint na Oficina para obter resultados selecionáveis dentro do app.');openWebSearch(q);return}
   $('onlineSearchResult').innerHTML='<div class="notice">🔎 Pesquisando informações públicas…</div>';
   try{
     const url=ep.includes('?')?ep+'&q='+encodeURIComponent(q):ep+'?q='+encodeURIComponent(q);
     const r=await fetch(url,{headers:{Accept:'application/json'}}); if(!r.ok)throw new Error('Servidor respondeu HTTP '+r.status);
-    const raw=await r.json(); const data=normalizeOnlineResult(raw,q); renderOnlineResult(data,q);
+    const raw=await r.json();
+    const results=normalizeOnlineResults(raw,q);
+    if(results.length>1) renderOnlineResult(results,q,null,targetIndex);
+    else if(results.length===1) renderOnlineResult(results[0],q,null,targetIndex);
+    else {const one=normalizeOnlineResult(raw,q);renderOnlineResult(one,q,null,targetIndex);}
   }catch(e){renderOnlineResult(null,q,e.message||'erro de conexão')}
 }
 function approveOnlineProduct(){
@@ -399,7 +428,7 @@ function searchThisProductOnline(i){
   if(!name) return alert('Digite o nome do produto primeiro.');
   $('onlineProductName').value=name;
   document.getElementById('onlineSearchResult')?.scrollIntoView({behavior:'smooth',block:'center'});
-  searchOnlineProduct();
+  searchOnlineProduct(i);
 }
 function editProduct(i,k,v){
   products[i][k]=v;
