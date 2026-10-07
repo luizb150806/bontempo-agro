@@ -1,9 +1,8 @@
-BONTEMPO AGRO — CALDA PRONTA V2
-- Mantém a versão simples e o histórico.
-- O volume final é área x L/ha.
-- Soma os produtos líquidos informados em L/ha ou mL/ha.
-- Desconta esse volume do volume final e mostra exatamente a água a adicionar.
-- Exemplo: calda final 300 L e 106,5 L de produtos líquidos => 193,5 L de água.
-- Produtos em kg/ha ou g/ha não são convertidos para litros nem descontados, pois isso exigiria densidade/concentração específica.
-- A sequência dos produtos segue a tabela fornecida.
+BONTEMPO AGRO — CALDA PRONTA V3
+- Versão simples com histórico e calda pronta.
+- Redutor de pH agora aparece explicitamente como formulação na posição 2 da tabela e pode ser selecionado no produto.
+- Volume final = área x L/ha.
+- Produtos líquidos em L/ha ou mL/ha são descontados do volume final para calcular a água a adicionar.
+- Produtos em kg/ha ou g/ha não são convertidos para litros sem densidade específica.
+- A ordem segue a tabela fornecida.
 - Conferir bula/rótulo, compatibilidade e orientação do fabricante.
